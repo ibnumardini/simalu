@@ -3,7 +3,7 @@
         <div class="row text-center align-items-center flex-row-reverse">
             <div class="col-lg-auto ms-lg-auto">
                 <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item">v0.1.0-{{ rand() }}</li>
+                    <li class="list-inline-item">v0.1.0-{{ time() }}</li>
                 </ul>
             </div>
             <div class="col-12 col-lg-auto mt-3 mt-lg-0">
