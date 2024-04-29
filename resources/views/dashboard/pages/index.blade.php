@@ -13,7 +13,7 @@
                         Welcome
                     </div>
                     <h2 class="page-title">
-                        {{ date('j F, Y') }} - Selamat siang
+                        {{ date('j F, Y') }} - {{ $greeting }} 🤗.
                     </h2>
                 </div>
             </div>
