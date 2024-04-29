@@ -55,13 +55,13 @@
                             </div>
                         </div>
                         <div class="form-footer">
-                            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="text-center text-secondary mt-3">
-                Don't have account yet? <a href="{{ route('register') }}" tabindex="-1">Sign up</a>
+                Don't have account yet? <a href="{{ route('register') }}" tabindex="-1">Register</a>
             </div>
         </div>
     </div>
