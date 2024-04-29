@@ -13,9 +13,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>@yield('title') - SIMALU - Sistem Informasi Manajemen Alumni.</title>
+    <title>@yield('title') - {{ str()->upper(config('app.name')) }} - {{ config('app.desc') }}.</title>
     <!-- CSS files -->
-    <link href=" {{ asset("/css/tabler.min.css") }}" rel="stylesheet" />
+    <link href=" {{ asset('/css/tabler.min.css') }}" rel="stylesheet" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -29,11 +29,18 @@
     </style>
 </head>
 
-<body class="layout-fluid">
-    @yield('content')
+<body>
+    <div class="page">
+        @include('dashboard.partials.navbar')
+        <div class="page-wrapper">
+            @yield('content')
+
+            @include('dashboard.partials.footer')
+        </div>
+    </div>
 
     <!-- Tabler Core -->
-    <script src="{{ asset("/js/tabler.min.js") }}" defer></script>
+    <script src="{{ asset('/js/tabler.min.js') }}" defer></script>
 </body>
 
 </html>
