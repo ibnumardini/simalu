@@ -21,6 +21,20 @@
                     <span class="fs-1 text-uppercase">{{ config('app.name') }}</span>
                 </span>
             </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-title">I'm so sorry…</h4>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                <div class="text-secondary">{{ $error }}</div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card card-md">
                 <div class="card-body">
                     <h2 class="h2 text-center mb-4">Login to your account</h2>
@@ -28,14 +42,16 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" placeholder="your@email.com" autocomplete="off">
+                            <input type="email" name="email" class="form-control" placeholder="your@email.com"
+                                autocomplete="off">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">
                                 Password
                             </label>
                             <div class="input-group input-group-flat">
-                                <input type="password" name="password" class="form-control" placeholder="Your password" autocomplete="off">
+                                <input type="password" name="password" class="form-control" placeholder="Your password"
+                                    autocomplete="off">
                             </div>
                         </div>
                         <div class="form-footer">
