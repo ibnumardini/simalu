@@ -35,7 +35,7 @@
                     <a href="#" class="dropdown-item">Profile</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="dropdown-item">Sign-out</button>
+                        <button class="dropdown-item">Logout</button>
                     </form>
                 </div>
             </div>
@@ -47,7 +47,7 @@
         <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item {{ request()->is('*dashboard') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('dashboard') }}">
                             <span
                                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -65,7 +65,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('*alumnis') ? 'alumnis' : '' }}">
                         <a class="nav-link" href="#">
                             <span
                                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
@@ -81,11 +81,11 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Alumni
+                                Alumnis
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{ request()->is('*master-data*') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span
@@ -108,17 +108,17 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item" href="#">
-                                        Sekolah
+                                    <a class="dropdown-item {{ request()->is('*master-data/schools*') ? 'active' : '' }}"
+                                        href="{{ route('schools.index') }}">
+                                        Schools
                                     </a>
                                     <a class="dropdown-item" href="#">
-                                        Perusahaan
+                                        Companies
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </li>
-
                 </ul>
             </div>
         </div>
