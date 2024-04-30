@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         $greeting = $this->greetingByHour();
-
+        
         return view("dashboard.pages.index", compact("greeting"));
     }
 }

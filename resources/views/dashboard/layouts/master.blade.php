@@ -16,6 +16,7 @@
     <title>@yield('title') - {{ str()->upper(config('app.name')) }} - {{ config('app.desc') }}.</title>
     <!-- CSS files -->
     <link href=" {{ asset('/css/tabler.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
