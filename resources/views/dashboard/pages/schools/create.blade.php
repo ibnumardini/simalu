@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Create Schools')
+@section('title', 'Create School')
 
 @section('content')
     <!-- Page header -->
