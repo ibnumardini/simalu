@@ -8,7 +8,8 @@
         "php": "^8.2",
         "laravel/fortify": "^1.21",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "realrashid/sweet-alert": "^7.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

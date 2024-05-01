@@ -16,7 +16,7 @@
     <title>@yield('title') - {{ str()->upper(config('app.name')) }} - {{ config('app.desc') }}.</title>
     <!-- CSS files -->
     <link href=" {{ asset('/css/tabler.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -40,8 +40,14 @@
         </div>
     </div>
 
+    <!-- Libs JS -->
+    <script src="{{ asset('/libs/tom-select/dist/js/tom-select.base.min.js') }}" defer></script>
     <!-- Tabler Core -->
     <script src="{{ asset('/js/tabler.min.js') }}" defer></script>
+
+    @stack('scripts')
+
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
 </body>
 
 </html>

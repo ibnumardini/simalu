@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\School\Utils;
 use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SchoolController extends Controller
 {
+    use Utils;
+
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +36,7 @@ class SchoolController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.schools.create');
     }
 
     /**
@@ -39,7 +44,17 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $school = $request->validate([
+            'name' => 'required|string|max:255',
+            'stage' => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
+            'address' => 'required|string|max:255',
+        ]);
+
+        School::create($school);
+
+        Alert::toast('School created successfully!', 'success');
+
+        return back();
     }
 
     /**
