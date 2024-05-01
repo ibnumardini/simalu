@@ -58,21 +58,13 @@ class SchoolController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
         $school = School::findOrFail($id);
 
-        return view('dashboard.pages.schools.edit', compact('school'));        
+        return view('dashboard.pages.schools.edit', compact('school'));
     }
 
     /**
@@ -98,6 +90,10 @@ class SchoolController extends Controller
      */
     public function destroy(string $id)
     {
-        //  
+        School::findOrFail($id)->delete();
+
+        Alert::toast('School deleted successfully!', 'success');
+
+        return back();
     }
 }

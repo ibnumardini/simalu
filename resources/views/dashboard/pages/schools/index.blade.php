@@ -84,7 +84,9 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $school->name }}</td>
-                                                <td><span class="badge badge-primary text-uppercase">{{ $school->stage }}</span></td>
+                                                <td><span
+                                                        class="badge badge-primary text-uppercase">{{ $school->stage }}</span>
+                                                </td>
                                                 <td class="text-secondary">{{ $school->address }}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -93,9 +95,18 @@
                                                             Actions
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="{{ route('schools.edit', ['school' => $school->id]) }}">
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('schools.edit', ['school' => $school->id]) }}">
                                                                 Edit
                                                             </a>
+                                                            <form
+                                                                action="{{ route('schools.destroy', ['school' => $school->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit" class="dropdown-item text-danger">
+                                                                    Delete
+                                                                </button>
                                                         </div>
                                                     </div>
                                                 </td>
