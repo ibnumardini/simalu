@@ -53,19 +53,11 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Company $company)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Company $company)
     {
-        //
+        return view('dashboard.pages.companies.edit', compact('company'));
     }
 
     /**
@@ -73,7 +65,16 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $companyData = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $company->update($companyData);
+
+        Alert::toast('Company updated successfully!', 'success');
+
+        return back();
     }
 
     /**
