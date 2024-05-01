@@ -13,8 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>@yield('title') - {{ str()->upper(config('app.name')) }} - {{ config('app.desc') }}.</title>
+    <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}" type="image/x-icon">
     <!-- CSS files -->
-    <link href="{{ asset('css/tabler.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('/css/tabler.min.css') }}" rel="stylesheet"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -29,6 +30,6 @@
     @yield('content')
 
     <!-- Tabler Core -->
-    <script src="{{ asset('js/tabler.min.js') }}" defer></script>
+    <script src="{{ asset('/js/tabler.min.js') }}" defer></script>
   </body>
 </html>
