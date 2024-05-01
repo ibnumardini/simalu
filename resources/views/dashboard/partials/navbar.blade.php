@@ -112,7 +112,8 @@
                                         href="{{ route('schools.index') }}">
                                         Schools
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item {{ request()->is('*master-data/companies*') ? 'active' : '' }}"
+                                        href="{{ route('companies.index') }}">
                                         Companies
                                     </a>
                                 </div>
