@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CompanyController extends Controller
 {
@@ -31,7 +32,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.companies.create');
     }
 
     /**
@@ -39,7 +40,16 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+        ]);
+
+        Company::create($company);
+
+        Alert::toast('Company created successfully!', 'success');
+
+        return back();
     }
 
     /**
