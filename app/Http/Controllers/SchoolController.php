@@ -70,7 +70,9 @@ class SchoolController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $school = School::findOrFail($id);
+
+        return view('dashboard.pages.schools.edit', compact('school'));        
     }
 
     /**
@@ -78,7 +80,17 @@ class SchoolController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $school = $request->validate([
+            'name' => 'required|string|max:255',
+            'stage' => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
+            'address' => 'required|string|max:255',
+        ]);
+
+        School::findOrFail($id)->update($school);
+
+        Alert::toast('School updated successfully!', 'success');
+
+        return back();
     }
 
     /**
@@ -86,6 +98,6 @@ class SchoolController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //  
     }
 }

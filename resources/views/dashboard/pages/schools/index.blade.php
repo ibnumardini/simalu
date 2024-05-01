@@ -93,7 +93,7 @@
                                                             Actions
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#">
+                                                            <a class="dropdown-item" href="{{ route('schools.edit', ['school' => $school->id]) }}">
                                                                 Edit
                                                             </a>
                                                         </div>
