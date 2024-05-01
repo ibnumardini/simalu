@@ -38,29 +38,34 @@
                                 <label class="form-label required">Name</label>
                                 <div>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" aria-describedby="emailHelp" placeholder="Enter name" required>
+                                        name="name" aria-describedby="emailHelp" placeholder="Enter name"
+                                        value="{{ old('name') }}" required>
                                 </div>
                                 @error('name')
-                                    <div class="invalid-feedback">{{ $error }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label required">Stage</label>
-                                <select type="text" name="stage" class="form-select @error('stage') is-invalid @enderror"
-                                    id="select-stage" required>
-                                    <option value="formal">Formal</option>
-                                    <option value="non-formal">Non Formal</option>
+                                <select type="text" name="stage"
+                                    class="form-select @error('stage') is-invalid @enderror" id="select-stage" required>
+                                    <option value="formal" {{ old('stage') == 'formal' ? 'selected' : '' }}>
+                                        Formal
+                                    </option>
+                                    <option value="non-formal" {{ old('stage') == 'non-formal' ? 'selected' : '' }}>
+                                        Non-Formal
+                                    </option>
                                 </select>
                                 @error('stage')
-                                    <div class="invalid-feedback">{{ $error }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3 mb-0">
                                 <label class="form-label required">Address</label>
                                 <textarea rows="5" class="form-control @error('address') is-invalid @enderror" name="address"
-                                    placeholder="Enter address" required></textarea>
+                                    placeholder="Enter address" required>{{ old('name') }}</textarea>
                                 @error('address')
-                                    <div class="invalid-feedback">{{ $error }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
