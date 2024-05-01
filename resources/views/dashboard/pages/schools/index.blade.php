@@ -107,6 +107,7 @@
                                                                 <button type="submit" class="dropdown-item text-danger">
                                                                     Delete
                                                                 </button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </td>
