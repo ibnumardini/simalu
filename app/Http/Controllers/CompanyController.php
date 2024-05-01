@@ -82,6 +82,10 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+
+        Alert::toast('Company deleted successfully!', 'success');
+
+        return back();
     }
 }
