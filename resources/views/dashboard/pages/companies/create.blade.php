@@ -28,7 +28,13 @@
         <div class="container-xl">
             <div class="row row-cards">
                 <div class="col-12">
-                    <form class="card" action="{{ route('companies.store') }}" method="post">
+                    @if ($errors->has('photos.*'))
+                        @foreach ($errors->all() as $message)
+                            <div class="my-3 alert alert-danger">{{ $message }}</div>
+                        @endforeach
+                    @endif
+                    <form class="card" action="{{ route('companies.store') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="card-header">
                             <h3 class="card-title">Create new school</h3>
@@ -50,6 +56,14 @@
                                 <textarea rows="5" class="form-control @error('address') is-invalid @enderror" name="address"
                                     placeholder="Enter address" required>{{ old('name') }}</textarea>
                                 @error('address')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-label required">Photos</div>
+                                <input type="file" class="form-control @error('photos') is-invalid @enderror"
+                                    name="photos[]" accept="image/gif,image/jpg,image/jpeg,image/png" multiple />
+                                @error('photos')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

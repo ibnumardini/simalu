@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\CompanyPhoto;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CompanyController extends Controller
@@ -43,13 +46,32 @@ class CompanyController extends Controller
         $company = $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
+            'photos' => 'required',
+            'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
         ]);
 
-        Company::create($company);
+        $created = Company::create($company);
+
+        collect($company["photos"])->each(fn($photo) => $this->storePhoto($photo, $created->id));
 
         Alert::toast('Company created successfully!', 'success');
 
         return back();
+    }
+
+    /**
+     * Store a newly created photos in storage.
+     */
+    private function storePhoto(UploadedFile $photo, int $companyId): void
+    {
+        $name = sprintf("%s.%s", Str::uuid()->toString(), $photo->extension());
+
+        $filepath = $photo->storeAs("companies", $name, "public");
+
+        CompanyPhoto::create([
+            "path" => $filepath,
+            "company_id" => $companyId,
+        ]);
     }
 
     /**
