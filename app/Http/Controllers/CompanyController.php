@@ -30,6 +30,11 @@ class CompanyController extends Controller
         return view('dashboard.pages.companies.index', compact('companies', 'searchQuery'));
     }
 
+    public function show(Company $company)
+    {
+        return view('dashboard.pages.companies.show', compact('company'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -13,4 +13,9 @@ class Company extends Model
         'name',
         'address',
     ];
+
+    public function photos()
+    {
+        return $this->hasMany(CompanyPhoto::class);
+    }
 }

@@ -43,6 +43,7 @@
 
     <!-- Libs JS -->
     <script src="{{ asset('/libs/tom-select/dist/js/tom-select.base.min.js') }}" defer></script>
+    <script src="{{ asset('/libs/fslightbox/index.js') }}" defer></script>
     <!-- Tabler Core -->
     <script src="{{ asset('/js/tabler.min.js') }}" defer></script>
 
