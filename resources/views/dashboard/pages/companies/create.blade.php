@@ -30,7 +30,7 @@
                 <div class="col-12">
                     @if ($errors->has('photos.*'))
                         @foreach ($errors->all() as $message)
-                            <div class="my-3 alert alert-danger">{{ $message }}</div>
+                            <div class="alert alert-danger">{{ $message }}</div>
                         @endforeach
                     @endif
                     <form class="card" action="{{ route('companies.store') }}" method="post"
