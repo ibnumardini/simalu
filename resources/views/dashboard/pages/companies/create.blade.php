@@ -37,7 +37,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="card-header">
-                            <h3 class="card-title">Create new school</h3>
+                            <h3 class="card-title">Create new company</h3>
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
