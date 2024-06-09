@@ -110,6 +110,12 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        $photos = $company->photos();
+
+        if ($photos->count()) {
+            $photos->each(fn($photo) => Storage::disk("public")->delete($photo->path));
+        }
+
         $company->delete();
 
         Alert::toast('Company deleted successfully!', 'success');
