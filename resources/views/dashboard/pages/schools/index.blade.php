@@ -75,7 +75,7 @@
                                             <th>Num.</th>
                                             <th>Name</th>
                                             <th>Stage</th>
-                                            <th>Address</th>
+                                            <th class="w-50">Address</th>
                                             <th class="w-1"></th>
                                         </tr>
                                     </thead>
