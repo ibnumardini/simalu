@@ -93,10 +93,33 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        $companyData = $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-        ]);
+        ];
+
+        // merge photo validation rules, when photos are provided
+        if ($newPhotos = collect($request->photos)->first()) {
+            $fileRules = [
+                'photos' => 'required',
+                'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
+            ];
+
+            $rules = array_merge($rules, $fileRules);
+        }
+
+        // do validation
+        $companyData = $request->validate($rules);
+
+        // delete old photos if there are new photos
+        if ($newPhotos && $company->photos()->count()) {
+            $company->photos()->each(fn($photo) => $this->deletePhotos($photo, 1));
+        }
+
+        // save the new photo if you have one
+        if ($newPhotos) {
+            collect($companyData["photos"])->each(fn($photo) => $this->storePhoto($photo, $company->id));
+        }
 
         $company->update($companyData);
 
@@ -113,7 +136,7 @@ class CompanyController extends Controller
         $photos = $company->photos();
 
         if ($photos->count()) {
-            $photos->each(fn($photo) => Storage::disk("public")->delete($photo->path));
+            $photos->each(fn($photo) => $this->deletePhotos($photo));
         }
 
         $company->delete();
@@ -121,5 +144,17 @@ class CompanyController extends Controller
         Alert::toast('Company deleted successfully!', 'success');
 
         return back();
+    }
+
+    /**
+     * Remove the specified photos from storage.
+     */
+    private function deletePhotos(CompanyPhoto $photo, $withData = 0): void
+    {
+        Storage::disk("public")->delete($photo->path);
+
+        if ($withData) {
+            $photo->delete();
+        }
     }
 }
