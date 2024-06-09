@@ -89,7 +89,7 @@
                                                     <div class="row row-cols-3 g-1">
                                                         @foreach ($company->photos as $photo)
                                                             <div class="col">
-                                                                <a data-fslightbox="gallery" href="{{ asset($photo->storage_path) }}">
+                                                                <a data-fslightbox="gallery-{{ $company->id }}" href="{{ asset($photo->storage_path) }}">
                                                                     <div class="img-responsive img-responsive-1x1 rounded border"
                                                                         style="background-image: url({{ asset($photo->storage_path) }})">
                                                                     </div>
