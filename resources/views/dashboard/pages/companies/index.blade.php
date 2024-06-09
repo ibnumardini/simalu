@@ -75,6 +75,7 @@
                                             <th>Num.</th>
                                             <th>Name</th>
                                             <th>Address</th>
+                                            <th>Photos</th>
                                             <th class="w-1"></th>
                                         </tr>
                                     </thead>
@@ -84,6 +85,19 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $company->name }}</td>
                                                 <td class="text-secondary">{{ $company->address }}</td>
+                                                <td>
+                                                    <div class="row row-cols-3 g-1">
+                                                        @foreach ($company->photos as $photo)
+                                                            <div class="col">
+                                                                <a data-fslightbox="gallery" href="{{ asset($photo->storage_path) }}">
+                                                                    <div class="img-responsive img-responsive-1x1 rounded border"
+                                                                        style="background-image: url({{ asset($photo->storage_path) }})">
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn dropdown-toggle"
