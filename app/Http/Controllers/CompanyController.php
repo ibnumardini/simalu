@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\CompanyPhoto;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -71,7 +72,7 @@ class CompanyController extends Controller
     {
         $name = sprintf("%s.%s", Str::uuid()->toString(), $photo->extension());
 
-        $filepath = $photo->storeAs("companies", $name, "public");
+        $filepath = Storage::disk("public")->putFileAs("companies", $photo, $name);
 
         CompanyPhoto::create([
             "path" => $filepath,

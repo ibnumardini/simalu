@@ -49,9 +49,9 @@
                                         <div class="row row-cols-6 g-3">
                                             @forelse ($company->photos as $photo)
                                                 <div class="col">
-                                                    <a data-fslightbox="gallery" href="{{ asset($photo->path) }}">
+                                                    <a data-fslightbox="gallery" href="{{ asset($photo->storage_path) }}">
                                                         <div class="img-responsive img-responsive-1x1 rounded border"
-                                                            style="background-image: url({{ asset($photo->path) }})">
+                                                            style="background-image: url({{ asset($photo->storage_path) }})">
                                                         </div>
                                                     </a>
                                                 </div>
