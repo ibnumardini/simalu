@@ -14,20 +14,23 @@ Thank you for your interest in contributing to SIMALU! We welcome contributions 
 1. Go to your forked repository on GitHub.
 2. Click the "Code" button and copy the URL.
 3. Open your terminal and run the following command to clone the repository to your local machine:
-   
-```sh
-git clone https://github.com/your-username/simalu.git
-```   
+
+   ```sh
+   git clone https://github.com/your-username/simalu.git
+   ```
 
 Replace `your-username` with your GitHub username.
 
 ### Create a New Branch
 
 1. Navigate to the cloned repository directory:
+   
    ```sh
    cd simalu
    ```
+   
 3. Create a new branch for your changes:
+   
    ```sh
    git checkout -b feat/awesome-feature
    ```
@@ -43,10 +46,13 @@ Replace `feat/awesome-feature` with a descriptive name for your branch.
 ## Committing Changes
 
 1. Add the changed files to the staging area:
+   
    ```sh
    git add .
    ```
+   
 3. Commit the changes with a descriptive message:
+   
    ```sh
    git commit -m "feat: add detailed description of your awesome changes"
    ```
@@ -54,6 +60,7 @@ Replace `feat/awesome-feature` with a descriptive name for your branch.
 ## Pushing Changes
 
 1. Push your changes to your forked repository on GitHub:
+   
    ```sh
    git push origin feat/awesome-feature
    ```
@@ -69,6 +76,7 @@ Replace `feat/awesome-feature` with a descriptive name for your branch.
 
 1. The repository maintainers may review your pull request and provide feedback or request changes.
 2. Make the necessary changes and push them to your branch:
+   
    ```sh
    git add .
    git commit -m "fix: incorporate feedback"
@@ -80,14 +88,19 @@ Replace `feat/awesome-feature` with a descriptive name for your branch.
 To avoid conflicts, keep your fork updated with the upstream repository:
 
 1. Add the upstream repository:
+   
    ```sh
    git remote add upstream https://github.com/ibnumardini/simalu.git
    ```
+   
 3. Fetch the latest changes from the upstream repository:
+   
    ```sh
    git fetch upstream
    ```
+   
 5. Merge the latest changes into your branch:
+   
    ```sh
    git merge upstream/master
    ```
