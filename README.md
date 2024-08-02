@@ -48,6 +48,9 @@
     php artisan serve --host=0.0.0.0 --port=8000
     ```
     
+## Community
+Feel free to join our [Discord server](https://discord.gg/FnHMcUYF) if you have ideas, feedback, suggestions, or just want to be part of our community.
+
 ## Contributing
 Thank you for your interest in contributing to SIMALU, Please follow the [Contribution Guide](https://github.com/ibnumardini/simalu/blob/master/CONTRIBUTING.md) to get started.
 
