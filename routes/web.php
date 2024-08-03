@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SchoolController;
@@ -13,4 +14,6 @@ Route::middleware('auth')->group(function () {
         Route::resource("schools", SchoolController::class)->except("show");
         Route::resource("companies", CompanyController::class);
     });
+
+    Route::resource('alumnis', AlumniController::class);
 });
