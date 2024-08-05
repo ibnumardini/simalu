@@ -10,7 +10,7 @@ class Alumni extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['mobile', 'address', 'dob', 'registration_at', 'graduation_at'];
+    protected $fillable = ['mobile', 'address', 'dob', 'registration_at', 'graduation_at', 'school_id', 'user_id'];
 
     /**
      * Get the user that owns the Alumni
