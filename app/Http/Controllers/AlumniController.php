@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Alumni;
-use Illuminate\Http\Request;
+use App\Models\School;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Requests\Alumni\AlumniStoreRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AlumniController extends Controller
 {
@@ -41,17 +45,30 @@ class AlumniController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        $schools = School::all();
+
+        return view("dashboard.pages.alumnis.create", compact('schools'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AlumniStoreRequest $request)
     {
-        //
+        $dataAlumni = $request->validated();
+
+        try {
+
+            Alumni::create($dataAlumni);
+
+            Alert::toast('Alumni created successfully!', 'success');
+
+            return redirect()->route('alumnis.index');
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
