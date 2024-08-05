@@ -168,4 +168,47 @@ class AlumniTest extends TestCase
 
         $this->assertFalse($alumnisCollection->contains($alumni));
     }
+
+    public function testCreateAlumniPageIsRendered(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $response = $this->get(route('alumnis.create'));
+        $response->assertStatus(200);
+        $response->assertViewIs('dashboard.pages.alumnis.create');
+    }
+
+    public function testCreateAlumniSuccess(): void
+    {
+        $user = User::factory()->create();
+        $school = School::factory()->create();
+
+        $this->actingAs($user);
+
+        $data = [
+            'mobile' => '081234567890',
+            'address' => 'Jl. Wanjay Ds. Wanjas',
+            'dob' => '2000-01-01',
+            'registration_at' => '2024-01-01',
+            'graduation_at' => '2024-12-31',
+            'school_id' => $school->id,
+            'user_id' => $user->id,
+        ];
+
+        $response = $this->post(route('alumnis.store'), $data);
+
+        $response->assertRedirect(route('alumnis.index'));
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('alumnis', [
+            'mobile' => $data['mobile'],
+            'address' => $data['address'],
+            'dob' => $data['dob'],
+            'registration_at' => $data['registration_at'],
+            'graduation_at' => $data['graduation_at'],
+            'school_id' => $data['school_id'],
+            'user_id' => $data['user_id'],
+        ]);
+    }
 }
