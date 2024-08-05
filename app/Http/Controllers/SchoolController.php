@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\School\Utils;
 use App\Models\School;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -95,5 +96,23 @@ class SchoolController extends Controller
         Alert::toast('School deleted successfully!', 'success');
 
         return back();
+    }
+
+    public function getSchool(Request $request): JsonResponse
+    {
+        $search = $request->input('search');
+
+        $schools_query = School::query();
+
+        if ($search) {
+            $schools_query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('address', 'like', '%' . $search . '%')
+                ->orWhere('stage', 'like', '%' . $search . '%');
+        }
+
+        $schools = $schools_query->limit(5)->get();
+
+
+        return response()->json($schools);
     }
 }
