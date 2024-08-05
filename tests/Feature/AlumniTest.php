@@ -179,6 +179,13 @@ class AlumniTest extends TestCase
         $response->assertViewIs('dashboard.pages.alumnis.create');
     }
 
+    public function testCreateAlumniPageIsNOtRendered(): void
+    {
+        $response = $this->get(route('alumnis.create'));
+        $response->assertStatus(302);
+        $response->assertRedirect(route('login'));
+    }
+
     public function testCreateAlumniSuccess(): void
     {
         $user = User::factory()->create();
@@ -209,6 +216,36 @@ class AlumniTest extends TestCase
             'graduation_at' => $data['graduation_at'],
             'school_id' => $data['school_id'],
             'user_id' => $data['user_id'],
+        ]);
+    }
+
+    public function testCreateAlumniFail(): void
+    {
+        $user = User::factory()->create();
+        $school = School::factory()->create();
+
+        $this->actingAs($user);
+
+        $invalidData = [
+            'mobile' => '',
+            'address' => '',
+            'dob' => 'not_a_date',
+            'registration_at' => '',
+            'graduation_at' => 'invalid_date',
+            'school_id' => $school->id,
+            'user_id' => $user->id,
+        ];
+
+        $response = $this->post(route('alumnis.store'), $invalidData);
+
+        $this->assertDatabaseMissing('alumnis', $invalidData);
+
+        $response->assertSessionHasErrors([
+            'mobile',
+            'address',
+            'dob',
+            'registration_at',
+            'graduation_at',
         ]);
     }
 }
