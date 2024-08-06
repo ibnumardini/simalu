@@ -179,7 +179,7 @@ class AlumniTest extends TestCase
         $response->assertViewIs('dashboard.pages.alumnis.create');
     }
 
-    public function testCreateAlumniPageIsNOtRendered(): void
+    public function testCreateAlumniPageIsNotRendered(): void
     {
         $response = $this->get(route('alumnis.create'));
         $response->assertStatus(302);
@@ -229,9 +229,9 @@ class AlumniTest extends TestCase
         $invalidData = [
             'mobile' => '',
             'address' => '',
-            'dob' => 'not_a_date',
+            'dob' => '',
             'registration_at' => '',
-            'graduation_at' => 'invalid_date',
+            'graduation_at' => '',
             'school_id' => $school->id,
             'user_id' => $user->id,
         ];
@@ -247,5 +247,30 @@ class AlumniTest extends TestCase
             'registration_at',
             'graduation_at',
         ]);
+    }
+
+    public function testEDitAlumniPageIsRendered(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        $alumni = Alumni::factory()->create();
+
+        $response = $this->get(route('alumnis.edit', ["alumni" => $alumni->id]));
+        $response->assertStatus(200);
+        $response->assertViewHas('alumni');
+        $response->assertViewIs('dashboard.pages.alumnis.edit');
+
+        $alumniOnView = $response->viewData('alumni');
+
+        $this->assertEquals($alumni->id, $alumniOnView->id);
+    }
+
+    public function testEditAlumniPageIsNotRendered(): void
+    {
+        $alumni = Alumni::factory()->create();
+        $response = $this->get(route('alumnis.edit', ["alumni" => $alumni->id]));
+
+        $response->assertRedirect(route('login'));
     }
 }
