@@ -84,7 +84,7 @@ class AlumniController extends Controller
      */
     public function edit(Alumni $alumni)
     {
-        //
+        return view('dashboard.pages.alumnis.edit', compact('alumni'));
     }
 
     /**
