@@ -49,7 +49,7 @@
                             <div class="mb-3">
                                 <label class="form-label required">Address</label>
                                 <textarea rows="5" class="form-control @error('address') is-invalid @enderror" name="address"
-                                    placeholder="Enter address">{{ old('name') }}</textarea>
+                                    placeholder="Enter address">{{ old('address') }}</textarea>
                                 @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -69,7 +69,7 @@
                             <div class="mb-3">
                                 <label class="form-label required">Registration At</label>
 
-                                <input type="date"
+                                <input type="text"
                                     class="form-control @error('registration_at') is-invalid @enderror datepicker"
                                     name="registration_at" value="{{ old('registration_at') }}"
                                     placeholder="Enter your registration date">
@@ -214,7 +214,8 @@
 
     <script>
         $(".datepicker").flatpickr({
-            dateFormat: "Y-m-d",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:s",
         });
     </script>
 @endpush
