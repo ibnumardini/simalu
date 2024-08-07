@@ -112,6 +112,10 @@ class AlumniController extends Controller
      */
     public function destroy(Alumni $alumni)
     {
-        //
+        School::findOrFail($alumni->id)->delete();
+
+        Alert::toast('Alumni deleted successfully!', 'success');
+
+        return back();
     }
 }
