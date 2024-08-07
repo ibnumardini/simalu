@@ -311,4 +311,32 @@ class AlumniTest extends TestCase
             'user_id' => $data['user_id'],
         ]);
     }
+
+    public function testDestroyAlumniSuccess(): void
+    {
+        $user = User::factory()->create();
+        $alumni = Alumni::factory()->create();
+
+        $this->actingAs($user);
+
+        $response = $this->delete(route('alumnis.destroy', $alumni->id));
+
+        $response->assertStatus(302);
+
+        $this->assertDatabaseMissing('alumnis', [
+            'id' => $alumni->id,
+        ]);
+    }
+
+    public function testDestroyAlumniFailure(): void
+    {
+        $user = User::factory()->create();
+        $alumniId = 69;
+
+        $this->actingAs($user);
+
+        $response = $this->delete(route('alumnis.destroy', $alumniId));
+
+        $response->assertStatus(404);
+    }
 }
