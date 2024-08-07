@@ -273,4 +273,42 @@ class AlumniTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
+
+    public function testUpdateAlumniSuccess(): void
+    {
+        $this->withoutExceptionHandling();
+        $user = User::factory()->create();
+        $school = School::factory()->create();
+        $alumni = Alumni::factory()->create([
+            'school_id' => $school->id,
+            'user_id' => $user->id,
+        ]);
+
+        $this->actingAs($user);
+
+        $data = [
+            'mobile' => '081234567891',
+            'address' => $alumni->address,
+            'dob' => '2000-02-02',
+            'registration_at' => '2024-02-01 00:00:00',
+            'graduation_at' => '2025-01-01 00:00:00',
+            'school_id' => $school->id,
+            'user_id' => $user->id,
+        ];
+
+        $response = $this->put(route('alumnis.update', $alumni->id), $data);
+        $response->assertStatus(302);
+        $response->assertRedirect(route('alumnis.index'));
+
+        $this->assertDatabaseHas('alumnis', [
+            'id' => $alumni->id,
+            'mobile' => $data['mobile'],
+            'address' => $data['address'],
+            'dob' => $data['dob'],
+            'registration_at' => $data['registration_at'],
+            'graduation_at' => $data['graduation_at'],
+            'school_id' => $data['school_id'],
+            'user_id' => $data['user_id'],
+        ]);
+    }
 }
