@@ -8,6 +8,7 @@ use App\Models\School;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Requests\Alumni\AlumniStoreRequest;
+use App\Http\Requests\Alumni\AlumniUpdateRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AlumniController extends Controller
@@ -90,9 +91,20 @@ class AlumniController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Alumni $alumni)
+    public function update(AlumniUpdateRequest $request, Alumni $alumni)
     {
-        //
+        $dataAlumni = $request->validated();
+
+        try {
+
+            Alumni::where('id', $alumni->id)->update($dataAlumni);
+
+            Alert::toast('Alumni updated successfully!', 'success');
+
+            return redirect()->route('alumnis.index');
+        } catch (Exception $e) {
+            return back()->withErrors($e->getMessage());
+        }
     }
 
     /**
