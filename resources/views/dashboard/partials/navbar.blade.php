@@ -65,7 +65,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item {{ request()->is('*alumnis') ? 'active' : '' }}">
+                    <li class="nav-item {{ request()->is('*alumnis*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('alumnis.index') }}">
                             <span
                                 class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
