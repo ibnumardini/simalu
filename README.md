@@ -1,4 +1,4 @@
-<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Noto_Emoji_v2.034_1f331.svg/512px-Noto_Emoji_v2.034_1f331.svg.png" width="125"></p>
+<p align="center"><img src="https://github.com/ibnumardini/simalu/blob/master/public/img/simalu.png" width="125"></p>
 
 <p align="center">
     <a href="https://www.apache.org/licenses/LICENSE-2.0"><img alt="SIMLAU license" src="https://img.shields.io/github/license/ibnumardini/simalu" alt="License"></a>
