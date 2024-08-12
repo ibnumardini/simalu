@@ -115,6 +115,24 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $role = Role::findById($id);
+
+            $role->delete();
+
+            DB::commit();
+
+            Alert::toast('Role deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            DB::rollBack();
+
+            Alert::toast('Role deletion failed!', 'error');
+        }
+
+        return back();
     }
 }
