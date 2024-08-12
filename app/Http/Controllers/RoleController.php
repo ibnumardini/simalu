@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\RBAC;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -26,12 +31,20 @@ class RoleController extends Controller
         return view('dashboard.pages.settings.roles.index', compact('roles', 'searchQuery'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+/**
+ * Show the form for creating a new resource.
+ */
     public function create()
     {
-        //
+        $permissions = [];
+
+        foreach (Permission::all() as $value) {
+            [$page, $scope] = explode("/", $value->name);
+
+            $permissions[$page][] = [$value->id, $scope];
+        }
+
+        return view('dashboard.pages.settings.roles.create', compact('permissions'));
     }
 
     /**
@@ -39,7 +52,38 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'permissions' => ['nullable', 'array', 'max:11'],
+            'permissions.*' => ['nullable', 'integer', 'max:11'],
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $role = Role::create([
+                'name' => $input['name'],
+                'guard' => RBAC::GUARD_WEB,
+            ]);
+
+            foreach ($input['permissions'] ?? [] as $id) {
+                $permission = Permission::findById($id);
+
+                $role->givePermissionTo($permission);
+            }
+
+            DB::commit();
+
+            Alert::toast('Role created successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            DB::rollBack();
+
+            Alert::toast('Role creation failed!', 'error');
+        }
+
+        return back();
     }
 
     /**
