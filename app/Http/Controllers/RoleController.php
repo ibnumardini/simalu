@@ -99,7 +99,19 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $role = Role::findById($id);
+
+        $permMap = $role->permissions->pluck('id', 'name')->toArray();
+
+        $permissions = [];
+
+        foreach (Permission::all() as $value) {
+            [$page, $scope] = explode("/", $value->name);
+
+            $permissions[$page][] = [$value->id, $scope, $permMap[$value->name] ?? 0];
+        }
+
+        return view('dashboard.pages.settings.roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -107,7 +119,44 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $input = $request->validate([
+            'name' => ['nullable', 'string', 'max:255'],
+            'permissions' => ['nullable', 'array'],
+            'permissions.*' => ['nullable', 'integer', 'max_digits:11'],
+        ]);
+
+        try {
+            $role = Role::findById($id);
+            if (!$role) {
+                throw new \Exception('role not found', 404);
+            }
+
+            DB::beginTransaction();
+
+            $role->update([
+                'name' => $input['name'] ?? $role->name,
+            ]);
+
+            $role->permissions()->detach();
+
+            foreach ($input['permissions'] ?? [] as $id) {
+                $permission = Permission::findById($id);
+
+                $role->givePermissionTo($permission);
+            }
+
+            DB::commit();
+
+            Alert::toast('Role updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            DB::rollBack();
+
+            Alert::toast('Role update failed!', 'error');
+        }
+
+        return back();
     }
 
     /**
