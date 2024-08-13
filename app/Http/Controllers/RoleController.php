@@ -54,8 +54,8 @@ class RoleController extends Controller
     {
         $input = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'permissions' => ['nullable', 'array', 'max:11'],
-            'permissions.*' => ['nullable', 'integer', 'max:11'],
+            'permissions' => ['nullable', 'array'],
+            'permissions.*' => ['nullable', 'integer', 'max_digits:11'],
         ]);
 
         try {
