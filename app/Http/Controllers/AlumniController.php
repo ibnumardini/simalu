@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Alumni;
-use App\Models\School;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Requests\Alumni\AlumniStoreRequest;
 use App\Http\Requests\Alumni\AlumniUpdateRequest;
+use App\Models\Alumni;
+use App\Models\School;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AlumniController extends Controller
@@ -77,7 +77,7 @@ class AlumniController extends Controller
      */
     public function show(Alumni $alumni)
     {
-        //
+        return view('dashboard.pages.alumnis.show', compact('alumni'));
     }
 
     /**

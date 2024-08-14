@@ -12,13 +12,14 @@ Route::redirect("/", "/dashboard");
 
 Route::middleware('auth')->group(function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
+
     Route::group(['prefix' => 'master-data'], function () {
         Route::resource("schools", SchoolController::class)->except("show");
         Route::get('/get-schools', [SchoolController::class, 'getSchool'])->name('get.school');
 
-        Route::get('/get-users', [UserController::class, 'getUser'])->name('get.user');
-
         Route::resource("companies", CompanyController::class);
+
+        Route::get('/get-users', [UserController::class, 'getUser'])->name('get.user');
     });
 
     Route::group(['prefix' => 'settings'], function () {
