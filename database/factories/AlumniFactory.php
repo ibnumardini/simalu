@@ -21,6 +21,7 @@ class AlumniFactory extends Factory
         return [
             'mobile' => fake()->phoneNumber,
             'address' => fake()->address,
+            'pob' => fake()->city,
             'dob' => fake()->date(),
             'registration_at' => fake()->dateTimeBetween('-5 years', '-4 years'),
             'graduation_at' => fake()->dateTimeBetween('-1 year', 'now'),

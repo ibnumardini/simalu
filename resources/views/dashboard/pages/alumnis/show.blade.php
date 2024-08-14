@@ -51,6 +51,10 @@
                   <td scope="col">{{ $alumni->address }}</td>
                 </tr>
                 <tr>
+                  <td scope="col">Place of birth</td>
+                  <td scope="col">{{ $alumni->pob }}</td>
+                </tr>
+                <tr>
                   <td scope="col">Date of birth</td>
                   <td scope="col">{{ $alumni->dob }}</td>
                 </tr>

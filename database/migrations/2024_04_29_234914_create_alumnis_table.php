@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('mobile');
             $table->string('address');
+            $table->string('pob');
             $table->date('dob');
             $table->timestamp('registration_at');
             $table->timestamp('graduation_at');

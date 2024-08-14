@@ -24,6 +24,7 @@ class AlumniUpdateRequest extends FormRequest
         return [
             "mobile" => 'required',
             "address" => 'required',
+            "pob" => 'required|string',
             "dob" => 'required|date',
             "registration_at" => 'required|date',
             "graduation_at" => 'required|date',
