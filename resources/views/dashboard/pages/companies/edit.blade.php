@@ -17,7 +17,7 @@
                         </ol>
                     </div>
                     <h2 class="page-title">
-                        Companies
+                        Company
                     </h2>
                 </div>
             </div>

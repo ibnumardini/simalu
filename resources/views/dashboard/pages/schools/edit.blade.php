@@ -17,7 +17,7 @@
                         </ol>
                     </div>
                     <h2 class="page-title">
-                        Schools
+                        School
                     </h2>
                 </div>
             </div>
