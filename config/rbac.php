@@ -31,10 +31,10 @@ $admin = [
 ];
 
 $superadmin = [
-    ['page' => RBAC::PAGE_SETTINGS, 'scope' => RBAC::SCOPE_CREATE],
-    ['page' => RBAC::PAGE_SETTINGS, 'scope' => RBAC::SCOPE_READ],
-    ['page' => RBAC::PAGE_SETTINGS, 'scope' => RBAC::SCOPE_UPDATE],
-    ['page' => RBAC::PAGE_SETTINGS, 'scope' => RBAC::SCOPE_DELETE],
+    ['page' => RBAC::PAGE_ROLES, 'scope' => RBAC::SCOPE_CREATE],
+    ['page' => RBAC::PAGE_ROLES, 'scope' => RBAC::SCOPE_READ],
+    ['page' => RBAC::PAGE_ROLES, 'scope' => RBAC::SCOPE_UPDATE],
+    ['page' => RBAC::PAGE_ROLES, 'scope' => RBAC::SCOPE_DELETE],
 ];
 
 return [

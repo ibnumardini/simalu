@@ -22,5 +22,5 @@ class RBAC
     const PAGE_SCHOOLS = 'schools';
     const PAGE_COMPANIES = 'companies';
     const PAGE_PROFILE = 'profiles';
-    const PAGE_SETTINGS = 'settings';
+    const PAGE_ROLES = 'roles';
 }
