@@ -4,8 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Actions\School\Utils;
 use App\Models\School;
+use App\Models\SchoolPhoto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -49,13 +55,46 @@ class SchoolController extends Controller
             'name' => 'required|string|max:255',
             'stage' => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
             'address' => 'required|string|max:255',
+            'photos' => 'nullable',
+            'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
         ]);
 
-        School::create($school);
+        try {
+            DB::beginTransaction();
 
-        Alert::toast('School created successfully!', 'success');
+            $created = School::create($school);
+
+            if ($request->has('photos')) {
+                collect($school["photos"])->each(fn($photo) => $this->storePhoto($photo, $created->id));
+            }
+
+            Alert::toast('School created successfully!', 'success');
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            Alert::toast('School creation failed!', 'error');
+
+            Log::error($e);
+        }
 
         return back();
+    }
+
+    /**
+     * Store a newly created photos in storage.
+     */
+    private function storePhoto(UploadedFile $photo, int $schoolId): void
+    {
+        $name = sprintf("%s.%s", Str::uuid()->toString(), $photo->extension());
+
+        $filepath = Storage::disk("public")->putFileAs("schools", $photo, $name);
+
+        SchoolPhoto::create([
+            "path" => $filepath,
+            "school_id" => $schoolId,
+        ]);
     }
 
     /**
@@ -111,7 +150,6 @@ class SchoolController extends Controller
         }
 
         $schools = $schools_query->limit(5)->get();
-
 
         return response()->json($schools);
     }
