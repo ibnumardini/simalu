@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\School\Utils;
 use App\Models\School;
 use App\Models\SchoolPhoto;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -135,6 +136,11 @@ class SchoolController extends Controller
         Alert::toast('School deleted successfully!', 'success');
 
         return back();
+    }
+
+    public function show(School $school): View
+    {
+        return view('dashboard.pages.schools.show', compact('school'));
     }
 
     public function getSchool(Request $request): JsonResponse

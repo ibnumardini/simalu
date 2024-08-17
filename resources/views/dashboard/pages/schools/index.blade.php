@@ -96,6 +96,10 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
+                                                                href="{{ route('schools.show', ['school' => $school->id]) }}">
+                                                                Detail
+                                                            </a>
+                                                            <a class="dropdown-item"
                                                                 href="{{ route('schools.edit', ['school' => $school->id]) }}">
                                                                 Edit
                                                             </a>

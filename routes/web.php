@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
 
     Route::group(['prefix' => 'master-data'], function () {
-        Route::resource("schools", SchoolController::class)->except("show");
+        Route::resource("schools", SchoolController::class);
         Route::get('/get-schools', [SchoolController::class, 'getSchool'])->name('get.school');
 
         Route::resource("companies", CompanyController::class);

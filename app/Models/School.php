@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class School extends Model
 {
@@ -20,5 +20,10 @@ class School extends Model
     public function alumni(): HasMany
     {
         return $this->hasMany(Alumni::class, 'school_id', 'id');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(SchoolPhoto::class);
     }
 }
