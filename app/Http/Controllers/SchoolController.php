@@ -111,19 +111,62 @@ class SchoolController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, School $school)
     {
-        $school = $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'stage' => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
             'address' => 'required|string|max:255',
-        ]);
+        ];
 
-        School::findOrFail($id)->update($school);
+        if ($hasFile = $request->hasFile('photos')) {
+            $fileRules = [
+                'photos' => 'required',
+                'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
+            ];
 
-        Alert::toast('School updated successfully!', 'success');
+            $rules = array_merge($rules, $fileRules);
+        }
+
+        $schoolData = $request->validate($rules);
+
+        try {
+            DB::beginTransaction();
+
+            if ($hasFile && $school->photos()->count()) {
+                $school->photos()->each(fn($photo) => $this->deletePhotos($photo, 1));
+            }
+
+            if ($hasFile) {
+                collect($schoolData["photos"])->each(fn($photo) => $this->storePhoto($photo, $school->id));
+            }
+
+            $school->update($schoolData);
+
+            DB::commit();
+
+            Alert::toast('School updated successfully!', 'success');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            Log::error($e);
+
+            Alert::toast('School updation failed!', 'error');
+        }
 
         return back();
+    }
+
+    /**
+     * Remove the specified photos from storage.
+     */
+    private function deletePhotos(SchoolPhoto $photo, $withData = 0): void
+    {
+        Storage::disk("public")->delete($photo->path);
+
+        if ($withData) {
+            $photo->delete();
+        }
     }
 
     /**
