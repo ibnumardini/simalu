@@ -31,9 +31,9 @@ class RoleController extends Controller
         return view('dashboard.pages.settings.roles.index', compact('roles', 'searchQuery'));
     }
 
-/**
- * Show the form for creating a new resource.
- */
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         $permissions = [];
@@ -84,14 +84,6 @@ class RoleController extends Controller
         }
 
         return back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -168,6 +160,10 @@ class RoleController extends Controller
             DB::beginTransaction();
 
             $role = Role::findById($id);
+
+            if ($role->name === RBAC::ROLE_SUPERADMIN) {
+                throw new \Exception("can't delete superadmin role", 400);
+            }
 
             $role->delete();
 
