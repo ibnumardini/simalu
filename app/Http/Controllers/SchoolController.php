@@ -172,11 +172,25 @@ class SchoolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(School $school)
     {
-        School::findOrFail($id)->delete();
+        try {
+            DB::beginTransaction();
 
-        Alert::toast('School deleted successfully!', 'success');
+            $school->photos()->each(fn($photo) => $this->deletePhotos($photo));
+
+            $school->delete();
+
+            DB::commit();
+
+            Alert::toast('School deleted successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            DB::rollBack();
+
+            Alert::toast('School deletion failed!', 'error');
+        }
 
         return back();
     }
