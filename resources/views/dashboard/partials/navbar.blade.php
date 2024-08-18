@@ -22,7 +22,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Profile</a>
+                    <a href="{{ route('profile.index') }}" class="dropdown-item">Profile</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="dropdown-item">Logout</button>
@@ -124,6 +124,10 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
+                                    <a class="dropdown-item {{ request()->is('*settings/profile*') ? 'active' : '' }}"
+                                        href="{{ route('profile.index') }}">
+                                        Profile
+                                    </a>
                                     <a class="dropdown-item {{ request()->is('*settings/roles*') ? 'active' : '' }}"
                                         href="{{ route('roles.index') }}">
                                         Roles

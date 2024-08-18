@@ -3,6 +3,7 @@
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'settings'], function () {
         Route::resource('roles', RoleController::class);
+        Route::resource('profile', ProfileController::class);
     });
 
     Route::resource('alumnis', AlumniController::class);
