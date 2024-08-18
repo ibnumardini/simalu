@@ -1,8 +1,8 @@
-@extends('dashboard.layouts.master')
+@extends('dashboard.pages.settings.layouts.master')
 
 @section('title', 'Edit Role')
 
-@section('content')
+@section('content-settings')
   <!-- Page header -->
   <div class="page-header d-print-none">
     <div class="container-xl">
