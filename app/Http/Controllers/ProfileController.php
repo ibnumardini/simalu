@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
@@ -30,7 +35,38 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'first_name' => ['nullable', 'string', 'max:255'],
+            'last_name' => ['nullable', 'string', 'max:255'],
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
+        ]);
+
+        try {
+            $user = User::findOrFail(Auth::id());
+
+            if ($request->hasFile('avatar')) {
+                $name = sprintf("%s.%s", Str::uuid()->toString(), $input['avatar']->extension());
+                $filepath = Storage::disk("public")->putFileAs("users", $input['avatar'], $name);
+            } else {
+                $filepath = $user->avatar;
+            }
+
+            $update = [
+                'first_name' => $input['first_name'] ?? $user->first_name,
+                'last_name' => $input['last_name'] ?? $user->last_name,
+                'avatar' => $filepath,
+            ];
+
+            $user->update($update);
+
+            Alert::toast('Profile updated successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            Alert::toast('Profile updation failed!', 'error');
+        }
+
+        return back();
     }
 
     /**
