@@ -25,6 +25,14 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'settings'], function () {
         Route::resource('roles', RoleController::class);
+
+        Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+            Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
+                Route::get('/', [ProfileController::class, 'changePassword'])->name('index');
+                Route::put('/', [ProfileController::class, 'updatePassword'])->name('update');
+            });
+        });
+
         Route::resource('profile', ProfileController::class);
     });
 

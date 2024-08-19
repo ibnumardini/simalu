@@ -55,7 +55,7 @@
       <h3 class="card-title mt-4">Password</h3>
       <p class="card-subtitle">Please always backup password in a safe place</p>
       <div>
-        <a href="#" class="btn">Set new password</a>
+        <a href="{{ route('profile.password.index') }}" class="btn">Set new password</a>
       </div>
       <h3 class="card-title mt-4">Joined</h3>
       <p class="card-subtitle">{{ $user->created_at->diffForHumans() }}, on {{ $user->created_at }}</p>

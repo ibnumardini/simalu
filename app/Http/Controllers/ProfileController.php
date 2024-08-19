@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
@@ -20,14 +22,6 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         return view('dashboard.pages.settings.profiles.index', compact('user'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -65,7 +59,7 @@ class ProfileController extends Controller
 
             $user->update($update);
 
-            Alert::toast('Profile updated successfully!', 'success');
+            Alert::toast('Profile updation successfully!', 'success');
         } catch (\Exception $e) {
             Log::error($e);
 
@@ -76,34 +70,41 @@ class ProfileController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for update password.
      */
-    public function show(string $id)
+    public function changePassword()
     {
-        //
+        return view('dashboard.pages.settings.profiles.change-password');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the user password.
      */
-    public function edit(string $id)
+    public function updatePassword(Request $request)
     {
-        //
-    }
+        $input = $request->validate([
+            'current_password' => ['required', 'string', 'min:6', 'max:255'],
+            'password' => ['required', 'string', 'confirmed', 'min:6', 'max:255', 'different:current_password'],
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        try {
+            $user = User::findOrFail(Auth::id());
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            if (!Hash::check($input['current_password'], $user->password)) {
+                throw ValidationException::withMessages(['current_password' => 'Current password is invalid']);
+            }
+
+            $user->update([
+                'password' => Hash::make($input['password']),
+            ]);
+
+            Alert::toast('User password change successful!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            Alert::toast('User password change failed: ' . $e->getMessage(), 'error');
+        }
+
+        return back();
     }
 }
