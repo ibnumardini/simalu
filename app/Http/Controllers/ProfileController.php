@@ -45,8 +45,14 @@ class ProfileController extends Controller
             $user = User::findOrFail(Auth::id());
 
             if ($request->hasFile('avatar')) {
+                $storage = Storage::disk('public');
+
                 $name = sprintf("%s.%s", Str::uuid()->toString(), $input['avatar']->extension());
-                $filepath = Storage::disk("public")->putFileAs("users", $input['avatar'], $name);
+                $filepath = $storage->putFileAs("users", $input['avatar'], $name);
+
+                if ($user->avatar) {
+                    $storage->delete($user->avatar);
+                }
             } else {
                 $filepath = $user->avatar;
             }
