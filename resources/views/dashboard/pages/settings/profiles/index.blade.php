@@ -6,6 +6,18 @@
   <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card-body">
+      @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-title">I'm so sorry…</h4>
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>
+                <div class="text-secondary">{{ $error }}</div>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
       <h2 class="mb-4">My Account</h2>
       <h3 class="card-title">Profile Details</h3>
       <div class="row align-items-center">
