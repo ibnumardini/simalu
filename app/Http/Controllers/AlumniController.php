@@ -6,6 +6,7 @@ use App\Http\Requests\Alumni\AlumniStoreRequest;
 use App\Http\Requests\Alumni\AlumniUpdateRequest;
 use App\Models\Alumni;
 use App\Models\School;
+use App\Models\WorkHistory;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -75,9 +76,18 @@ class AlumniController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Alumni $alumni)
+    public function show(Alumni $alumni, Request $request)
     {
-        return view('dashboard.pages.alumnis.show', compact('alumni'));
+        $paginate = 10;
+        $searchQuery = $request->q;
+
+        $workHistories = WorkHistory::where('alumni_id', $alumni->id)->when($request->has('q'), function ($query) use ($searchQuery, $paginate) {
+            return $query->where('name', 'like', "%{$searchQuery}%")->paginate($paginate)->withQueryString();
+        }, function ($query) use ($paginate) {
+            return $query->paginate($paginate)->withQueryString();
+        });
+
+        return view('dashboard.pages.alumnis.show', compact('alumni', 'workHistories'));
     }
 
     /**
