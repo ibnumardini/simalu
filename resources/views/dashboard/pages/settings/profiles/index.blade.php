@@ -3,8 +3,9 @@
 @section('title', 'My Account')
 
 @section('content-settings')
-  <form action="{{ route('profile.store') }}" method="POST" enctype="multipart/form-data">
+  <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    @method('put')
     <div class="card-body">
       @if ($errors->any())
         <div class="alert alert-danger" role="alert">
