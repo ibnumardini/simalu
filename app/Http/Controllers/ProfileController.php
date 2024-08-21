@@ -25,9 +25,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update profile.
      */
-    public function store(Request $request)
+    public function update(Request $request)
     {
         $input = $request->validate([
             'first_name' => ['nullable', 'string', 'max:255'],

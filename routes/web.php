@@ -27,13 +27,14 @@ Route::middleware('auth')->group(function () {
         Route::resource('roles', RoleController::class);
 
         Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('index');
+            Route::put('/', [ProfileController::class, 'update'])->name('update');
+
             Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
                 Route::get('/', [ProfileController::class, 'changePassword'])->name('index');
                 Route::put('/', [ProfileController::class, 'updatePassword'])->name('update');
             });
         });
-
-        Route::resource('profile', ProfileController::class);
     });
 
     Route::resource('alumnis', AlumniController::class);
