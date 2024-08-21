@@ -37,5 +37,9 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+    Route::group(['prefix' => 'alumnis', 'as' => 'alumnis.'], function () {
+        Route::get('/{alumni}/work-histories', [AlumniController::class, 'showWorkHistories'])->name('work-histories');
+    });
+
     Route::resource('alumnis', AlumniController::class);
 });

@@ -76,7 +76,15 @@ class AlumniController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Alumni $alumni, Request $request)
+    public function show(Alumni $alumni)
+    {
+        return view('dashboard.pages.alumnis.show.detail', compact('alumni'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function showWorkHistories(Alumni $alumni, Request $request)
     {
         $paginate = 10;
         $searchQuery = $request->q;
@@ -87,7 +95,7 @@ class AlumniController extends Controller
             return $query->paginate($paginate)->withQueryString();
         });
 
-        return view('dashboard.pages.alumnis.show', compact('alumni', 'workHistories'));
+        return view('dashboard.pages.alumnis.show.work-histories', compact('alumni', 'workHistories'));
     }
 
     /**
