@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/get-schools', [SchoolController::class, 'getSchool'])->name('get.school');
 
         Route::resource("companies", CompanyController::class);
+        Route::get('/get-companies', [CompanyController::class, 'getCompaniesJson'])->name('companies.get');
 
         Route::get('/get-users', [UserController::class, 'getUser'])->name('get.user');
     });
@@ -38,7 +39,13 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => 'alumnis', 'as' => 'alumnis.'], function () {
-        Route::get('/{alumni}/work-histories', [AlumniController::class, 'showWorkHistories'])->name('work-histories');
+        Route::controller(AlumniController::class)->group(function () {
+            Route::group(['prefix' => '/{alumni}/work-histories', 'as' => 'work-histories.'], function () {
+                Route::get('/', 'showWorkHistories')->name('show');
+                Route::get('/create', 'createWorkHistories')->name('create');
+                Route::post('/create', 'storeWorkHistories')->name('store');
+            });
+        });
     });
 
     Route::resource('alumnis', AlumniController::class);

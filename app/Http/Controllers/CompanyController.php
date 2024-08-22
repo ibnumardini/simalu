@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\CompanyPhoto;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -156,5 +157,16 @@ class CompanyController extends Controller
         if ($withData) {
             $photo->delete();
         }
+    }
+
+    public function getCompaniesJson(Request $request): JsonResponse
+    {
+        $q = $request->input('q', '');
+
+        $companies = Company::when($q, function ($query) use ($q) {
+            return $query->where('name', 'like', '%' . $q . '%');
+        })->limit(5)->get();
+
+        return response()->json($companies);
     }
 }

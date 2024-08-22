@@ -9,6 +9,7 @@ use App\Models\School;
 use App\Models\WorkHistory;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -82,23 +83,6 @@ class AlumniController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function showWorkHistories(Alumni $alumni, Request $request)
-    {
-        $paginate = 10;
-        $searchQuery = $request->q;
-
-        $workHistories = WorkHistory::where('alumni_id', $alumni->id)->when($request->has('q'), function ($query) use ($searchQuery, $paginate) {
-            return $query->where('name', 'like', "%{$searchQuery}%")->paginate($paginate)->withQueryString();
-        }, function ($query) use ($paginate) {
-            return $query->paginate($paginate)->withQueryString();
-        });
-
-        return view('dashboard.pages.alumnis.show.work-histories', compact('alumni', 'workHistories'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Alumni $alumni)
@@ -133,6 +117,58 @@ class AlumniController extends Controller
         School::findOrFail($alumni->id)->delete();
 
         Alert::toast('Alumni deleted successfully!', 'success');
+
+        return back();
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function showWorkHistories(Alumni $alumni, Request $request)
+    {
+        $paginate = 10;
+        $searchQuery = $request->q;
+
+        $workHistories = WorkHistory::where('alumni_id', $alumni->id)->when($request->has('q'), function ($query) use ($searchQuery, $paginate) {
+            return $query->where('name', 'like', "%{$searchQuery}%")->paginate($paginate)->withQueryString();
+        }, function ($query) use ($paginate) {
+            return $query->paginate($paginate)->withQueryString();
+        });
+
+        return view('dashboard.pages.alumnis.show.work-histories.show', compact('alumni', 'workHistories'));
+    }
+
+    /**
+     * Show form for create work history.
+     */
+    public function createWorkHistories(Alumni $alumni)
+    {
+        return view('dashboard.pages.alumnis.show.work-histories.create', compact('alumni'));
+    }
+
+    /**
+     * Store work history data.
+     */
+    public function storeWorkHistories(Alumni $alumni, Request $request)
+    {
+        $input = $request->validate([
+            'position' => ['required', 'string', 'max:255'],
+            'start_at' => ['required', 'date'],
+            'resigned_at' => ['nullable', 'date'],
+            'company' => ['required', 'integer', 'digits_between:1,11'],
+        ]);
+
+        $data = collect($input)->forget('company')->put('company_id', $input['company'])->put('alumni_id', $alumni->id);
+
+        try {
+            WorkHistory::create($data->toArray());
+
+            Alert::toast('Work history creation successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            Alert::toast('Work history creation failed!', 'error');
+        }
 
         return back();
     }

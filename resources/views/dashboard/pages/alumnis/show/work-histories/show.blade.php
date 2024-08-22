@@ -8,7 +8,7 @@
           <div class="card-header">
             <h3 class="card-title">History of {{ $alumni->user->fullname }}</h3>
             <div class="card-actions">
-              <a href="#" class="btn btn-primary">
+              <a href="{{ route('alumnis.work-histories.create', ['alumni' => $alumni]) }}" class="btn btn-primary">
                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
