@@ -72,7 +72,7 @@
           </div>
         </div>
         <div class="card-footer text-end">
-          <a href="{{ route('alumnis.work-histories.show', compact('alumni')) }}" class="btn btn-danger">Back</a>
+          <a href="{{ route('alumnis.work-histories.show', compact('alumni')) }}" class="btn btn-danger">Cancel</a>
           <button type="submit" class="btn btn-primary">Create</button>
         </div>
       </form>
