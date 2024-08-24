@@ -67,7 +67,8 @@
                             Actions
                           </button>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="">
+                            <a class="dropdown-item"
+                              href="{{ route('alumnis.work-histories.edit', ['alumni' => $alumni, 'workHistory' => $item]) }}">
                               Edit
                             </a>
                             <form action="" method="post">

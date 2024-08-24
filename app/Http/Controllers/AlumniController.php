@@ -172,4 +172,46 @@ class AlumniController extends Controller
 
         return back();
     }
+
+    /**
+     * Show work history edit view.
+     */
+    public function editWorkHistories(Alumni $alumni, WorkHistory $workHistory)
+    {
+        return view('dashboard.pages.alumnis.show.work-histories.edit', compact('alumni', 'workHistory'));
+    }
+
+    /**
+     * Update work history data.
+     */
+    public function updateWorkHistories(Alumni $alumni, WorkHistory $workHistory, Request $request)
+    {
+        $input = $request->validate([
+            'position' => ['nullable', 'string', 'max:255'],
+            'start_at' => ['nullable', 'date'],
+            'resigned_at' => ['nullable', 'date'],
+            'company' => ['nullable', 'integer', 'digits_between:1,11'],
+        ]);
+
+        $request->merge([
+            'position' => $input['position'] ?? $workHistory->position,
+            'start_at' => $input['start_at'] ?? $workHistory->start_at,
+            'resigned_at' => $input['resigned_at'],
+            'company' => $input['company'] ?? $workHistory->company,
+        ]);
+
+        $data = collect($input)->forget('company')->put('company_id', $input['company']);
+
+        try {
+            $workHistory->update($data->toArray());
+
+            Alert::toast('Work history updation successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            Alert::toast('Work history updation failed!', 'error');
+        }
+
+        return back();
+    }
 }

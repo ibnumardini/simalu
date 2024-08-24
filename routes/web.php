@@ -44,6 +44,11 @@ Route::middleware('auth')->group(function () {
                 Route::get('/', 'showWorkHistories')->name('show');
                 Route::get('/create', 'createWorkHistories')->name('create');
                 Route::post('/create', 'storeWorkHistories')->name('store');
+
+                Route::prefix('{workHistory}')->group(function () {
+                    Route::get('/edit', 'editWorkHistories')->name('edit');
+                    Route::put('/update', 'updateWorkHistories')->name('update');
+                });
             });
         });
     });
