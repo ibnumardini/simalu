@@ -71,7 +71,9 @@
                               href="{{ route('alumnis.work-histories.edit', ['alumni' => $alumni, 'workHistory' => $item]) }}">
                               Edit
                             </a>
-                            <form action="" method="post">
+                            <form
+                              action="{{ route('alumnis.work-histories.delete', ['alumni' => $alumni, 'workHistory' => $item]) }}"
+                              method="post">
                               @csrf
                               @method('delete')
                               <button type="submit" class="dropdown-item text-danger">

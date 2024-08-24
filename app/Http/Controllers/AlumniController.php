@@ -214,4 +214,22 @@ class AlumniController extends Controller
 
         return back();
     }
+
+    /**
+     * Delete work history data.
+     */
+    public function deleteWorkHistories(Alumni $alumni, WorkHistory $workHistory)
+    {
+        try {
+            $workHistory->delete();
+
+            Alert::toast('Work history deletion successfully!', 'success');
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            Alert::toast('Work history deletion failed!', 'error');
+        }
+
+        return back();
+    }
 }

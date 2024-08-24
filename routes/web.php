@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
                 Route::prefix('{workHistory}')->group(function () {
                     Route::get('/edit', 'editWorkHistories')->name('edit');
                     Route::put('/update', 'updateWorkHistories')->name('update');
+                    Route::delete('/', 'deleteWorkHistories')->name('delete');
                 });
             });
         });
