@@ -94,6 +94,15 @@
       ["start", "resigned"].forEach((id) => {
         window.Litepicker && (new Litepicker({
           element: document.getElementById(`datepicker_${id}_at`),
+          resetButton: () => {
+            let btn = document.createElement('button');
+            btn.innerText = 'Clear';
+            btn.addEventListener('click', (evt) => {
+              evt.preventDefault();
+            });
+
+            return btn;
+          },
           buttonText: {
             previousMonth: prevSvg,
             nextMonth: nextSvg,
