@@ -196,11 +196,10 @@ class AlumniController extends Controller
         $request->merge([
             'position' => $input['position'] ?? $workHistory->position,
             'start_at' => $input['start_at'] ?? $workHistory->start_at,
-            'resigned_at' => $input['resigned_at'],
             'company' => $input['company'] ?? $workHistory->company,
         ]);
 
-        $data = collect($input)->forget('company')->put('company_id', $input['company']);
+        $data = collect($request->all())->forget(['_token', '_method', 'company'])->put('company_id', $input['company']);
 
         try {
             $workHistory->update($data->toArray());
