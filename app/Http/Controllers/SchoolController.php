@@ -109,11 +109,19 @@ class SchoolController extends Controller
      */
     public function edit(string $id)
     {
-        $school = School::findOrFail($id);
+        try {
+            $school = School::findOrFail($id);
 
-        Gate::authorize('update', $school);
+            Gate::authorize('update', $school);
 
-        return view('dashboard.pages.schools.edit', compact('school'));
+            return view('dashboard.pages.schools.edit', compact('school'));
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            Alert::toast('School not found!', 'error');
+
+            return back();
+        }
     }
 
     /**
