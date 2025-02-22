@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Constants\RBAC;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
@@ -17,7 +17,9 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $paginate = 10;
+        Gate::authorize('view', Role::class);
+
+        $paginate    = 10;
         $searchQuery = $request->q;
 
         if ($request->has('q')) {
@@ -28,6 +30,8 @@ class RoleController extends Controller
             $roles = Role::paginate($paginate)->withQueryString();
         }
 
+        $roles->map(fn($role) => Gate::authorize('view', $role));
+
         return view('dashboard.pages.settings.roles.index', compact('roles', 'searchQuery'));
     }
 
@@ -36,6 +40,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Role::class);
+
         $permissions = [];
 
         foreach (Permission::all() as $value) {
@@ -52,9 +58,11 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Role::class);
+
         $input = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'permissions' => ['nullable', 'array'],
+            'name'          => ['required', 'string', 'max:255'],
+            'permissions'   => ['nullable', 'array'],
             'permissions.*' => ['nullable', 'integer', 'max_digits:11'],
         ]);
 
@@ -62,7 +70,7 @@ class RoleController extends Controller
             DB::beginTransaction();
 
             $role = Role::create([
-                'name' => $input['name'],
+                'name'  => $input['name'],
                 'guard' => RBAC::GUARD_WEB,
             ]);
 
@@ -91,6 +99,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('update', Role::class);
+
         $role = Role::findById($id);
 
         $permMap = $role->permissions->pluck('id', 'name')->toArray();
@@ -111,15 +121,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        Gate::authorize('update', Role::class);
+
         $input = $request->validate([
-            'name' => ['nullable', 'string', 'max:255'],
-            'permissions' => ['nullable', 'array'],
+            'name'          => ['nullable', 'string', 'max:255'],
+            'permissions'   => ['nullable', 'array'],
             'permissions.*' => ['nullable', 'integer', 'max_digits:11'],
         ]);
 
         try {
             $role = Role::findById($id);
-            if (!$role) {
+            if (! $role) {
                 throw new \Exception('role not found', 404);
             }
 
@@ -156,6 +168,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('delete', Role::class);
+
         try {
             DB::beginTransaction();
 
