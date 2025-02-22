@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Actions\School\Utils;
@@ -10,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -25,7 +25,7 @@ class SchoolController extends Controller
      */
     public function index(Request $request)
     {
-        $paginate = 10;
+        $paginate    = 10;
         $searchQuery = $request->q;
 
         if ($request->has('q')) {
@@ -36,6 +36,8 @@ class SchoolController extends Controller
             $schools = School::paginate($paginate)->withQueryString();
         }
 
+        $schools->map(fn($school) => Gate::authorize('view', $school));
+
         return view('dashboard.pages.schools.index', compact('schools', 'searchQuery'));
     }
 
@@ -44,6 +46,8 @@ class SchoolController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', School::class);
+
         return view('dashboard.pages.schools.create');
     }
 
@@ -52,11 +56,13 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', School::class);
+
         $school = $request->validate([
-            'name' => 'required|string|max:255',
-            'stage' => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
-            'address' => 'required|string|max:255',
-            'photos' => 'nullable',
+            'name'     => 'required|string|max:255',
+            'stage'    => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
+            'address'  => 'required|string|max:255',
+            'photos'   => 'nullable',
             'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
         ]);
 
@@ -93,7 +99,7 @@ class SchoolController extends Controller
         $filepath = Storage::disk("public")->putFileAs("schools", $photo, $name);
 
         SchoolPhoto::create([
-            "path" => $filepath,
+            "path"      => $filepath,
             "school_id" => $schoolId,
         ]);
     }
@@ -105,6 +111,8 @@ class SchoolController extends Controller
     {
         $school = School::findOrFail($id);
 
+        Gate::authorize('update', $school);
+
         return view('dashboard.pages.schools.edit', compact('school'));
     }
 
@@ -113,15 +121,17 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
+        Gate::authorize('update', $school);
+
         $rules = [
-            'name' => 'required|string|max:255',
-            'stage' => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
+            'name'    => 'required|string|max:255',
+            'stage'   => [Rule::in([self::STAGE_FORMAL, self::STAGE_NON_FORMAL])],
             'address' => 'required|string|max:255',
         ];
 
         if ($hasFile = $request->hasFile('photos')) {
             $fileRules = [
-                'photos' => 'required',
+                'photos'   => 'required',
                 'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
             ];
 
@@ -175,6 +185,8 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
         try {
+            Gate::authorize('delete', $school);
+
             DB::beginTransaction();
 
             $school->photos()->each(fn($photo) => $this->deletePhotos($photo));
@@ -197,11 +209,14 @@ class SchoolController extends Controller
 
     public function show(School $school): View
     {
+        Gate::authorize('view', $school);
+
         return view('dashboard.pages.schools.show', compact('school'));
     }
 
     public function getSchool(Request $request): JsonResponse
     {
+
         $search = $request->input('search');
 
         $schools_query = School::query();
@@ -213,6 +228,8 @@ class SchoolController extends Controller
         }
 
         $schools = $schools_query->limit(5)->get();
+
+        $schools->map(fn($school) => Gate::authorize('view', $school));
 
         return response()->json($schools);
     }
