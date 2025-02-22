@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Company;
@@ -7,6 +6,7 @@ use App\Models\CompanyPhoto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,7 +18,9 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $paginate = 10;
+        Gate::authorize('view', Company::class);
+
+        $paginate    = 10;
         $searchQuery = $request->q;
 
         if ($request->has('q')) {
@@ -34,6 +36,8 @@ class CompanyController extends Controller
 
     public function show(Company $company)
     {
+        Gate::authorize('view', Company::class);
+
         return view('dashboard.pages.companies.show', compact('company'));
     }
 
@@ -42,6 +46,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Company::class);
+
         return view('dashboard.pages.companies.create');
     }
 
@@ -50,10 +56,12 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Company::class);
+
         $company = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'photos' => 'required',
+            'name'     => 'required|string|max:255',
+            'address'  => 'required|string|max:255',
+            'photos'   => 'required',
             'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
         ]);
 
@@ -76,7 +84,7 @@ class CompanyController extends Controller
         $filepath = Storage::disk("public")->putFileAs("companies", $photo, $name);
 
         CompanyPhoto::create([
-            "path" => $filepath,
+            "path"       => $filepath,
             "company_id" => $companyId,
         ]);
     }
@@ -86,6 +94,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        Gate::authorize('update', Company::class);
+
         return view('dashboard.pages.companies.edit', compact('company'));
     }
 
@@ -94,15 +104,17 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
+        Gate::authorize('update', Company::class);
+
         $rules = [
-            'name' => 'required|string|max:255',
+            'name'    => 'required|string|max:255',
             'address' => 'required|string|max:255',
         ];
 
         // merge photo validation rules, when photos are provided
         if ($newPhotos = collect($request->photos)->first()) {
             $fileRules = [
-                'photos' => 'required',
+                'photos'   => 'required',
                 'photos.*' => 'mimes:gif,jpg,jpeg,png|max:2048',
             ];
 
@@ -134,6 +146,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        Gate::authorize('delete', Company::class);
+
         $photos = $company->photos();
 
         if ($photos->count()) {
@@ -161,6 +175,8 @@ class CompanyController extends Controller
 
     public function getCompaniesJson(Request $request): JsonResponse
     {
+        Gate::authorize('view', Company::class);
+
         $q = $request->input('q', '');
 
         $companies = Company::when($q, function ($query) use ($q) {

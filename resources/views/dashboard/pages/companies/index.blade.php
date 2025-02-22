@@ -19,21 +19,23 @@
                         Companies
                     </h2>
                 </div>
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <a href="{{ route('companies.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M12 5l0 14"></path>
-                                <path d="M5 12l14 0"></path>
-                            </svg>
-                            Create new company
-                        </a>
+                @can(config('access.companies/create'))
+                    <div class="col-auto ms-auto d-print-none">
+                        <div class="btn-list">
+                            <a href="{{ route('companies.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 5l0 14"></path>
+                                    <path d="M5 12l14 0"></path>
+                                </svg>
+                                Create new company
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @endcan
             </div>
         </div>
     </div>
@@ -89,7 +91,8 @@
                                                     <div class="row row-cols-3 g-1">
                                                         @foreach ($company->photos as $photo)
                                                             <div class="col">
-                                                                <a data-fslightbox="gallery-{{ $company->id }}" href="{{ asset($photo->storage_path) }}">
+                                                                <a data-fslightbox="gallery-{{ $company->id }}"
+                                                                    href="{{ asset($photo->storage_path) }}">
                                                                     <div class="img-responsive img-responsive-1x1 rounded border"
                                                                         style="background-image: url({{ asset($photo->storage_path) }})">
                                                                     </div>
@@ -109,19 +112,23 @@
                                                                 href="{{ route('companies.show', ['company' => $company->id]) }}">
                                                                 Detail
                                                             </a>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('companies.edit', ['company' => $company->id]) }}">
-                                                                Edit
-                                                            </a>
-                                                            <form
-                                                                action="{{ route('companies.destroy', ['company' => $company->id]) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button type="submit" class="dropdown-item text-danger">
-                                                                    Delete
-                                                                </button>
-                                                            </form>
+                                                            @can(config('access.companies/update'))
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('companies.edit', ['company' => $company->id]) }}">
+                                                                    Edit
+                                                                </a>
+                                                            @endcan
+                                                            @can(config('access.companies/delete'))
+                                                                <form
+                                                                    action="{{ route('companies.destroy', ['company' => $company->id]) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button type="submit" class="dropdown-item text-danger">
+                                                                        Delete
+                                                                    </button>
+                                                                </form>
+                                                            @endcan
                                                         </div>
                                                     </div>
                                                 </td>
