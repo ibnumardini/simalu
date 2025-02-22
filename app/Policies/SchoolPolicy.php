@@ -10,7 +10,7 @@ class SchoolPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, School $school): bool
+    public function view(User $user): bool
     {
         return $user->can(sprintf("%s/%s", RBAC::PAGE_SCHOOLS, RBAC::SCOPE_READ));
     }
@@ -26,7 +26,7 @@ class SchoolPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, School $school): bool
+    public function update(User $user): bool
     {
         return $user->can(sprintf("%s/%s", RBAC::PAGE_SCHOOLS, RBAC::SCOPE_UPDATE));
     }
@@ -34,7 +34,7 @@ class SchoolPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, School $school): bool
+    public function delete(User $user): bool
     {
         return $user->can(sprintf("%s/%s", RBAC::PAGE_SCHOOLS, RBAC::SCOPE_DELETE));
     }

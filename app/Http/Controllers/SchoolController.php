@@ -25,6 +25,8 @@ class SchoolController extends Controller
      */
     public function index(Request $request)
     {
+        Gate::authorize('view', School::class);
+
         $paginate    = 10;
         $searchQuery = $request->q;
 
@@ -35,8 +37,6 @@ class SchoolController extends Controller
         } else {
             $schools = School::paginate($paginate)->withQueryString();
         }
-
-        $schools->map(fn($school) => Gate::authorize('view', $school));
 
         return view('dashboard.pages.schools.index', compact('schools', 'searchQuery'));
     }
@@ -110,9 +110,9 @@ class SchoolController extends Controller
     public function edit(string $id)
     {
         try {
-            $school = School::findOrFail($id);
+            Gate::authorize('update', School::class);
 
-            Gate::authorize('update', $school);
+            $school = School::findOrFail($id);
 
             return view('dashboard.pages.schools.edit', compact('school'));
         } catch (\Exception $e) {
@@ -129,7 +129,7 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
-        Gate::authorize('update', $school);
+        Gate::authorize('update', School::class);
 
         $rules = [
             'name'    => 'required|string|max:255',
@@ -193,7 +193,7 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
         try {
-            Gate::authorize('delete', $school);
+            Gate::authorize('delete', School::class);
 
             DB::beginTransaction();
 
@@ -217,13 +217,14 @@ class SchoolController extends Controller
 
     public function show(School $school): View
     {
-        Gate::authorize('view', $school);
+        Gate::authorize('view', School::class);
 
         return view('dashboard.pages.schools.show', compact('school'));
     }
 
     public function getSchool(Request $request): JsonResponse
     {
+        Gate::authorize('view', School::class);
 
         $search = $request->input('search');
 
