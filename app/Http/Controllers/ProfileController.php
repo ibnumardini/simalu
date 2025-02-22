@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +21,8 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
+        Gate::authorize('view', User::class);
+
         return view('dashboard.pages.settings.profiles.index', compact('user'));
     }
 
@@ -29,10 +31,12 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
+        Gate::authorize('update', User::class);
+
         $input = $request->validate([
             'first_name' => ['nullable', 'string', 'max:255'],
-            'last_name' => ['nullable', 'string', 'max:255'],
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
+            'last_name'  => ['nullable', 'string', 'max:255'],
+            'avatar'     => ['nullable', 'image', 'mimes:jpeg,jpg,png', 'max:5120'],
         ]);
 
         try {
@@ -41,7 +45,7 @@ class ProfileController extends Controller
             if ($request->hasFile('avatar')) {
                 $storage = Storage::disk('public');
 
-                $name = sprintf("%s.%s", Str::uuid()->toString(), $input['avatar']->extension());
+                $name     = sprintf("%s.%s", Str::uuid()->toString(), $input['avatar']->extension());
                 $filepath = $storage->putFileAs("users", $input['avatar'], $name);
 
                 if ($user->avatar) {
@@ -53,8 +57,8 @@ class ProfileController extends Controller
 
             $update = [
                 'first_name' => $input['first_name'] ?? $user->first_name,
-                'last_name' => $input['last_name'] ?? $user->last_name,
-                'avatar' => $filepath,
+                'last_name'  => $input['last_name'] ?? $user->last_name,
+                'avatar'     => $filepath,
             ];
 
             $user->update($update);
@@ -74,6 +78,8 @@ class ProfileController extends Controller
      */
     public function changePassword()
     {
+        Gate::authorize('update', User::class);
+
         return view('dashboard.pages.settings.profiles.change-password');
     }
 
@@ -82,15 +88,17 @@ class ProfileController extends Controller
      */
     public function updatePassword(Request $request)
     {
+        Gate::authorize('update', User::class);
+
         $input = $request->validate([
             'current_password' => ['required', 'string', 'min:6', 'max:255'],
-            'password' => ['required', 'string', 'confirmed', 'min:6', 'max:255', 'different:current_password'],
+            'password'         => ['required', 'string', 'confirmed', 'min:6', 'max:255', 'different:current_password'],
         ]);
 
         try {
             $user = User::findOrFail(Auth::id());
 
-            if (!Hash::check($input['current_password'], $user->password)) {
+            if (! Hash::check($input['current_password'], $user->password)) {
                 throw ValidationException::withMessages(['current_password' => 'Current password is invalid']);
             }
 
