@@ -30,4 +30,9 @@ class WorkHistory extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function alumni(): BelongsTo
+    {
+        return $this->belongsTo(Alumni::class);
+    }
 }

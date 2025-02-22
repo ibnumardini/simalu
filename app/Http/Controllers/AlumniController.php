@@ -148,6 +148,8 @@ class AlumniController extends Controller
             return $query->paginate($paginate)->withQueryString();
         });
 
+        $workHistories->map(fn($workHistory) => Gate::authorize('view', $workHistory));
+
         return view('dashboard.pages.alumnis.show.work-histories.show', compact('alumni', 'workHistories'));
     }
 
@@ -156,6 +158,8 @@ class AlumniController extends Controller
      */
     public function createWorkHistories(Alumni $alumni)
     {
+        Gate::authorize('create', WorkHistory::class);
+
         return view('dashboard.pages.alumnis.show.work-histories.create', compact('alumni'));
     }
 
@@ -164,6 +168,8 @@ class AlumniController extends Controller
      */
     public function storeWorkHistories(Alumni $alumni, Request $request)
     {
+        Gate::authorize('create', WorkHistory::class);
+
         $input = $request->validate([
             'position' => ['required', 'string', 'max:255'],
             'start_at' => ['required', 'date'],
@@ -191,6 +197,8 @@ class AlumniController extends Controller
      */
     public function editWorkHistories(Alumni $alumni, WorkHistory $workHistory)
     {
+        Gate::authorize('update', $workHistory);
+
         return view('dashboard.pages.alumnis.show.work-histories.edit', compact('alumni', 'workHistory'));
     }
 
@@ -199,6 +207,8 @@ class AlumniController extends Controller
      */
     public function updateWorkHistories(Alumni $alumni, WorkHistory $workHistory, Request $request)
     {
+        Gate::authorize('update', WorkHistory::class);
+
         $input = $request->validate([
             'position' => ['nullable', 'string', 'max:255'],
             'start_at' => ['nullable', 'date'],
@@ -232,6 +242,8 @@ class AlumniController extends Controller
      */
     public function deleteWorkHistories(Alumni $alumni, WorkHistory $workHistory)
     {
+        Gate::authorize('delete', $workHistory);
+
         try {
             $workHistory->delete();
 
