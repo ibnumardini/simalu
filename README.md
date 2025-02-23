@@ -15,7 +15,7 @@
 1. First of all, you can download the [zip](https://github.com/ibnumardini/simalu/archive/refs/heads/master.zip) or clone this project.
    
    ```sh
-   git clone https://github.com/your-username/simalu.git
+   git clone https://github.com/ibnumardini/simalu.git
    ```
    
 2. Jump straight into the project.
