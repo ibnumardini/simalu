@@ -8,6 +8,7 @@ use App\Models\Alumni;
 use App\Models\School;
 use App\Models\WorkHistory;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
@@ -17,11 +18,45 @@ use RealRashid\SweetAlert\Facades\Alert;
 class AlumniController extends Controller
 {
     /**
+     * Check if the authenticated user has an alumni record and redirect accordingly.
+     */
+    private function checkAlumniAndRedirect(): RedirectResponse | null
+    {
+        if (! Gate::check('viewAny', Alumni::class)) {
+            $alumniId = Alumni::where('user_id', auth()->id())->first()?->id;
+            if (! $alumniId) {
+                return redirect()->route('alumnis.create');
+            }
+
+            return redirect()->route('alumnis.show', $alumniId);
+        }
+
+        return null;
+    }
+
+    /**
+     * Prevent users from creating multiple alumni records unless they have management permissions.
+     */
+    private function cannotDuplicateAlumni(): RedirectResponse | null
+    {
+        $canManage = Gate::check('viewAny', Alumni::class);
+        $alumni    = Alumni::where('user_id', auth()->id())->first();
+
+        if ($alumni && ! $canManage) {
+            return redirect()->route('alumnis.show', $alumni->id);
+        }
+
+        return null;
+    }
+
+    /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View
+    public function index(Request $request): View | RedirectResponse
     {
-        Gate::authorize('viewAny', Alumni::class);
+        if ($redirect = $this->checkAlumniAndRedirect()) {
+            return $redirect;
+        }
 
         $paginate = 10;
 
@@ -51,9 +86,13 @@ class AlumniController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(): View | RedirectResponse
     {
         Gate::authorize('create', Alumni::class);
+
+        if ($redirect = $this->cannotDuplicateAlumni()) {
+            return $redirect;
+        }
 
         $schools = School::all();
 
@@ -67,7 +106,15 @@ class AlumniController extends Controller
     {
         Gate::authorize('create', Alumni::class);
 
+        if ($redirect = $this->cannotDuplicateAlumni()) {
+            return $redirect;
+        }
+
         $dataAlumni = $request->validated();
+
+        if (! Gate::check('viewAny', Alumni::class)) {
+            $dataAlumni['user_id'] = auth()->id();
+        }
 
         try {
             Alumni::create($dataAlumni);

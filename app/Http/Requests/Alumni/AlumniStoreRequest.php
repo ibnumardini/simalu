@@ -29,7 +29,7 @@ class AlumniStoreRequest extends FormRequest
             "registration_at" => 'required|date',
             "graduation_at" => 'required|date',
             "school_id" => 'required',
-            "user_id" => 'required',
+            "user_id" => 'nullable|exists:users,id',
         ];
     }
 }

@@ -108,16 +108,17 @@
                 @enderror
               </div>
 
-              <div class="mb-3">
-                <label class="form-label required">User</label>
-                <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
-                  id="select-users">
-                </select>
-                @error('user_id')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-
+              @can('viewAny', App\Models\Alumni::class)
+                <div class="mb-3">
+                  <label class="form-label required">User</label>
+                  <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
+                    id="select-users">
+                  </select>
+                  @error('user_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              @endcan
 
             </div>
             <div class="card-footer text-end">
@@ -141,7 +142,8 @@
 
   <script>
     $(document).ready(function() {
-      new TomSelect("#select-users", {
+      if ($("#select-users").length) {
+        new TomSelect("#select-users", {
         valueField: 'id',
         labelField: 'full_name',
         searchField: ['first_name', 'last_name'],
@@ -176,8 +178,9 @@
             return '<div>' + escape(item.full_name) + '</div>';
           }
         }
-      })
-
+        });
+      }
+      
       new TomSelect("#select-schools", {
         valueField: 'id',
         labelField: 'name',
