@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumni;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -66,6 +68,8 @@ class UserController extends Controller
 
     public function getUser(Request $request): JsonResponse
     {
+        Gate::authorize('viewAny', Alumni::class);
+
         $search = $request->input('search');
 
         $user_query = User::query();
