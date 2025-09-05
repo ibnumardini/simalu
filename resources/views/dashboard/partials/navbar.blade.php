@@ -128,10 +128,12 @@
                                         href="{{ route('profile.index') }}">
                                         Profile
                                     </a>
-                                    <a class="dropdown-item {{ request()->is('*settings/roles*') ? 'active' : '' }}"
-                                        href="{{ route('roles.index') }}">
-                                        Roles
-                                    </a>
+                                    @can('view', App\Models\Role::class)
+                                        <a class="dropdown-item {{ request()->is('*settings/roles*') ? 'active' : '' }}"
+                                            href="{{ route('roles.index') }}">
+                                            Roles
+                                        </a>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
