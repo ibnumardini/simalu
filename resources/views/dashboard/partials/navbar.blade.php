@@ -11,6 +11,15 @@
             </span>
         </h1>
         <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item dropdown me-3">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <span class="fi fi-{{ app()->getLocale() == 'id' ? 'id' : 'us' }} me-2"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <a href="{{ route('locale.switch', ['locale' => 'id']) }}" class="dropdown-item"><span class="fi fi-id me-2"></span> @lang('messages.navbar.lang.indonesia')</a>
+                    <a href="{{ route('locale.switch', ['locale' => 'en']) }}" class="dropdown-item"><span class="fi fi-us me-2"></span> @lang('messages.navbar.lang.english')</a>
+                </div>
+            </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
@@ -22,10 +31,10 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="{{ route('profile.index') }}" class="dropdown-item">Profile</a>
+                    <a href="{{ route('profile.index') }}" class="dropdown-item">@lang('messages.navbar.profile')</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <button class="dropdown-item">Logout</button>
+                        <button class="dropdown-item">@lang('messages.navbar.logout')</button>
                     </form>
                 </div>
             </div>
@@ -51,7 +60,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Dashboard
+                                @lang('messages.navbar.dashboard')
                             </span>
                         </a>
                     </li>
@@ -71,7 +80,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Alumnis
+                                @lang('messages.navbar.alumnis')
                             </span>
                         </a>
                     </li>
@@ -92,7 +101,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Master data
+                                @lang('messages.navbar.master_data')
                             </span>
                         </a>
                         <div class="dropdown-menu">
@@ -100,11 +109,11 @@
                                 <div class="dropdown-menu-column">
                                     <a class="dropdown-item {{ request()->is('*master-data/schools*') ? 'active' : '' }}"
                                         href="{{ route('schools.index') }}">
-                                        Schools
+                                        @lang('messages.navbar.schools')
                                     </a>
                                     <a class="dropdown-item {{ request()->is('*master-data/companies*') ? 'active' : '' }}"
                                         href="{{ route('companies.index') }}">
-                                        Companies
+                                        @lang('messages.navbar.companies')
                                     </a>
                                 </div>
                             </div>
@@ -118,7 +127,7 @@
                                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>
                             </span>
                             <span class="nav-link-title">
-                                Settings
+                                @lang('messages.navbar.settings')
                             </span>
                         </a>
                         <div class="dropdown-menu">
@@ -126,12 +135,12 @@
                                 <div class="dropdown-menu-column">
                                     <a class="dropdown-item {{ request()->is('*settings/profile*') ? 'active' : '' }}"
                                         href="{{ route('profile.index') }}">
-                                        Profile
+                                        @lang('messages.navbar.profile')
                                     </a>
                                     @can('view', App\Models\Role::class)
                                         <a class="dropdown-item {{ request()->is('*settings/roles*') ? 'active' : '' }}"
                                             href="{{ route('roles.index') }}">
-                                            Roles
+                                            @lang('messages.navbar.roles')
                                         </a>
                                     @endcan
                                 </div>
