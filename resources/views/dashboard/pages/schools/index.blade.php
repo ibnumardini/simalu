@@ -108,12 +108,10 @@
                                                                 </a>
                                                             @endcan
                                                             @can(config('access.schools/delete'))
-                                                                <form
-                                                                    action="{{ route('schools.destroy', ['school' => $school->id]) }}"
-                                                                    method="post">
+                                                               <form action="{{ route('schools.destroy', ['school' => $school->id]) }}" method="post">
                                                                     @csrf
                                                                     @method('delete')
-                                                                    <button type="submit" class="dropdown-item text-danger">
+                                                                    <button type="submit" class="dropdown-item text-danger btn-confirm-delete">
                                                                         Delete
                                                                     </button>
                                                                 </form>
@@ -140,3 +138,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <x-form-delete-confirmation target=".btn-confirm-delete" />
+@endpush
