@@ -134,6 +134,10 @@ class AlumniController extends Controller
     {
         Gate::authorize('view', $alumni);
 
+        $title = 'Delete Alumni!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('dashboard.pages.alumnis.show.detail', compact('alumni'));
     }
 
@@ -156,13 +160,18 @@ class AlumniController extends Controller
 
         $dataAlumni = $request->validated();
 
+        if (! Gate::check('viewAny', Alumni::class)) {
+            $dataAlumni['user_id'] = auth()->id();
+        }
+
         try {
             Alumni::where('id', $alumni->id)->update($dataAlumni);
 
             Alert::toast('Alumni updated successfully!', 'success');
 
-            return redirect()->route('alumnis.index');
+            return redirect()->route('alumnis.show', $alumni->id);
         } catch (Exception $e) {
+            dd($e);
             return back()->withErrors($e->getMessage());
         }
     }
@@ -174,11 +183,17 @@ class AlumniController extends Controller
     {
         Gate::authorize('delete', $alumni);
 
-        School::findOrFail($alumni->id)->delete();
+        try {
+            $alumni->delete();
 
-        Alert::toast('Alumni deleted successfully!', 'success');
+            Alert::toast('Alumni deleted successfully!', 'success');
+        } catch (Exception $e) {
+            Log::error($e);
 
-        return back();
+            Alert::toast('Alumni deletion failed!', 'error');
+        }
+
+        return redirect()->route('alumnis.index');
     }
 
     /**
