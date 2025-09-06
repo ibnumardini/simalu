@@ -16,8 +16,8 @@
                     <span class="fi fi-{{ app()->getLocale() == 'id' ? 'id' : 'us' }} me-2"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="{{ route('locale.switch', ['locale' => 'id']) }}" class="dropdown-item"><span class="fi fi-id me-2"></span> @lang('messages.navbar.lang.indonesia')</a>
-                    <a href="{{ route('locale.switch', ['locale' => 'en']) }}" class="dropdown-item"><span class="fi fi-us me-2"></span> @lang('messages.navbar.lang.english')</a>
+                    <a href="{{ route('locale.switch', ['locale' => $locale_id_ID]) }}" class="dropdown-item"><span class="fi fi-id me-2"></span> @lang('messages.navbar.lang.indonesia')</a>
+                    <a href="{{ route('locale.switch', ['locale' => $locale_en_US]) }}" class="dropdown-item"><span class="fi fi-us me-2"></span> @lang('messages.navbar.lang.english')</a>
                 </div>
             </div>
             <div class="nav-item dropdown">

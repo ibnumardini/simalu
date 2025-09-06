@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Constants\Locale;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpFoundation\Response;
 
 class LocaleMiddleware
@@ -19,6 +21,9 @@ class LocaleMiddleware
     {
         $locale = Session::get('locale', config('app.locale'));
         App::setLocale($locale);
+
+        View::share('locale_en_US', Locale::EN_US);
+        View::share('locale_id_ID', Locale::ID_ID);
 
         return $next($request);
     }
