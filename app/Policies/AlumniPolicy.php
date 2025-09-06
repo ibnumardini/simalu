@@ -50,7 +50,7 @@ class AlumniPolicy
      */
     public function update(User $user, Alumni $alumni): bool
     {
-        return $user->can(sprintf("%s/%s", RBAC::PAGE_ALUMNIS, RBAC::SCOPE_UPDATE));
+        return $user->can(sprintf("%s/%s", RBAC::PAGE_ALUMNIS, RBAC::SCOPE_UPDATE)) && $alumni->user()->is($user);
     }
 
     /**
@@ -58,6 +58,6 @@ class AlumniPolicy
      */
     public function delete(User $user, Alumni $alumni): bool
     {
-        return $user->can(sprintf("%s/%s", RBAC::PAGE_ALUMNIS, RBAC::SCOPE_DELETE));
+        return $user->can(sprintf("%s/%s", RBAC::PAGE_ALUMNIS, RBAC::SCOPE_DELETE)) && $alumni->user()->is($user);
     }
 }
