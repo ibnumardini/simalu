@@ -114,7 +114,7 @@
                 @enderror
               </div>
 
-              @can('viewAny', App\Models\Alumni::class)
+              @can(config('access.alumnis/management'))
                 <div class="mb-3">
                   <label class="form-label required">User</label>
                   <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
