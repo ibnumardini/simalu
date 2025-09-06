@@ -114,17 +114,18 @@
                 @enderror
               </div>
 
-              <div class="mb-3">
-                <label class="form-label required">User</label>
-                <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
-                  id="select-users">
-                  <option value="{{ $alumni->user_id }}" selected>{{ $alumni->user->fullName }}
-                </select>
-                @error('user_id')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-
+              @can('viewAny', App\Models\Alumni::class)
+                <div class="mb-3">
+                  <label class="form-label required">User</label>
+                  <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
+                    id="select-users">
+                    <option value="{{ $alumni->user_id }}" selected>{{ $alumni->user->fullName }}
+                  </select>
+                  @error('user_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+              @endcan
 
             </div>
             <div class="card-footer text-end">
@@ -149,42 +150,44 @@
   <script>
     $(document).ready(function() {
 
-      new TomSelect("#select-users", {
-        valueField: 'id',
-        labelField: 'full_name',
-        searchField: ['first_name', 'last_name'],
+      if ($("#select-users").length) {
+        new TomSelect("#select-users", {
+          valueField: 'id',
+          labelField: 'full_name',
+          searchField: ['first_name', 'last_name'],
 
-        load: function(query, callback) {
-          $.ajax({
-            url: '/master-data/get-users',
-            data: {
-              search: query
-            },
-            dataType: 'json',
-            success: function(items) {
-              items = items.map(item => {
-                item.full_name =
-                  `${item.first_name} ${item.last_name}`;
-                return item;
-              });
+          load: function(query, callback) {
+            $.ajax({
+              url: '/master-data/get-users',
+              data: {
+                search: query
+              },
+              dataType: 'json',
+              success: function(items) {
+                items = items.map(item => {
+                  item.full_name =
+                    `${item.first_name} ${item.last_name}`;
+                  return item;
+                });
 
-              callback(items);
-            },
-            error: function(items) {
-              console.log(items)
-            }
-          });
-        },
-        render: {
-          item: function(item, escape) {
-            return '<div>' + escape(item.full_name) + '</div>';
+                callback(items);
+              },
+              error: function(items) {
+                console.log(items)
+              }
+            });
           },
+          render: {
+            item: function(item, escape) {
+              return '<div>' + escape(item.full_name) + '</div>';
+            },
 
-          option: function(item, escape) {
-            return '<div>' + escape(item.full_name) + '</div>';
+            option: function(item, escape) {
+              return '<div>' + escape(item.full_name) + '</div>';
+            }
           }
-        }
-      })
+        })
+      }
 
       new TomSelect("#select-schools", {
         valueField: 'id',
