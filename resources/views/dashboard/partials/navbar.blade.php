@@ -13,7 +13,7 @@
         <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item dropdown me-3">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <span class="fi fi-{{ app()->getLocale() == 'id' ? 'id' : 'us' }} me-2"></span>
+                    <span class="fi fi-{{ app()->getLocale() == $locale_id_ID ? 'id' : 'us' }} me-2"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="{{ route('locale.switch', ['locale' => $locale_id_ID]) }}" class="dropdown-item"><span class="fi fi-id me-2"></span> @lang('messages.navbar.lang.indonesia')</a>
