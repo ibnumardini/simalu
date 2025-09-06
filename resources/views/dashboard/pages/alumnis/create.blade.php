@@ -101,7 +101,7 @@
               <div class="mb-3">
                 <label class="form-label required">School</label>
                 <select type="text" name="school_id" class="form-select @error('school_id') is-invalid @enderror"
-                  id="select-schools">
+                  id="select-schools" placeholder="Type to search ...">
                 </select>
                 @error('school_id')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -112,7 +112,7 @@
                 <div class="mb-3">
                   <label class="form-label required">User</label>
                   <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
-                    id="select-users">
+                    id="select-users" placeholder="Type to search ...">
                   </select>
                   @error('user_id')
                     <div class="invalid-feedback">{{ $message }}</div>

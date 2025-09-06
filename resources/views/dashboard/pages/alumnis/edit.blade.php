@@ -104,7 +104,7 @@
               <div class="mb-3">
                 <label class="form-label required">School</label>
                 <select type="text" name="school_id" class="form-select @error('school_id') is-invalid @enderror"
-                  id="select-schools">
+                  id="select-schools" placeholder="Type to search ...">
                   <option value="{{ $alumni->school_id }}" selected>{{ $alumni->school->name }}
                   </option>
 
@@ -118,7 +118,7 @@
                 <div class="mb-3">
                   <label class="form-label required">User</label>
                   <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
-                    id="select-users">
+                    id="select-users" placeholer="Type to seach ...">
                     <option value="{{ $alumni->user_id }}" selected>{{ $alumni->user->fullName }}
                   </select>
                   @error('user_id')
