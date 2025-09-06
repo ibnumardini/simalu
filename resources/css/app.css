@@ -1,0 +1,3 @@
+.btn > svg, .btn > svg * {
+  pointer-events: none;
+}

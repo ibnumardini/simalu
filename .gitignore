@@ -17,6 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+*.lock
 
 # macOS system files
 .DS_Store
