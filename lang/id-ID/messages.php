@@ -16,4 +16,13 @@ return [
             'english' => 'Bahasa Inggris Amerika',
         ],
     ],
+    'dashboard' => [
+        'pretitle' => 'Selamat datang, :name',
+        'title' => ':greeting',
+        'greeting' => [
+            'morning' => 'Selamat pagi',
+            'afternoon' => 'Selamat siang',
+            'evening' => 'Selamat malam',
+        ],
+    ],
 ];

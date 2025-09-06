@@ -10,12 +10,12 @@ trait Utils
     {
         $hour = Carbon::now()->hour;
 
-        if ($hour > 12) {
-            return 'Good Afternoon';
-        } else if ($hour > 18) {
-            return 'Good Evening';
-        } else {
-            return 'Good Morning';
+        if ($hour >= 18) {
+            return __('messages.dashboard.greeting.evening');
+        } elseif ($hour >= 12) {
+            return __('messages.dashboard.greeting.afternoon');
         }
+
+        return __('messages.dashboard.greeting.morning');
     }
 }

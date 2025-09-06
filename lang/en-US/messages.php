@@ -16,4 +16,13 @@ return [
             'english' => 'American English',
         ],
     ],
+    'dashboard' => [
+        'pretitle' => 'Welcome, :name',
+        'title' => ':greeting',
+        'greeting' => [
+            'morning' => 'Good Morning',
+            'afternoon' => 'Good Afternoon',
+            'evening' => 'Good Evening',
+        ],
+    ],
 ];

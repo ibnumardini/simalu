@@ -10,10 +10,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Welcome
+                        @lang('messages.dashboard.pretitle', ['name' => auth()->user()->first_name])
                     </div>
                     <h2 class="page-title">
-                        {{ date('j F, Y') }} - {{ $greeting }} 🤗.
+                        {{ date('j F, Y') }} - @lang('messages.dashboard.title', ['greeting' => $greeting]) 🤗
                     </h2>
                 </div>
             </div>
