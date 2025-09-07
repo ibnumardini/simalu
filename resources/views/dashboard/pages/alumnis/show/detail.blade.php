@@ -21,7 +21,7 @@
             <td scope="col">{{ $alumni->mobile }}</td>
           </tr>
           <tr>
-            <td scope="col">Adress</td>
+            <td scope="col">Address</td>
             <td scope="col">{{ $alumni->address }}</td>
           </tr>
           <tr>
