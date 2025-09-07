@@ -135,10 +135,6 @@ class AlumniController extends Controller
     {
         Gate::authorize('view', $alumni);
 
-        $title = __('messages.delete_confirmation.title');
-        $text = __('messages.delete_confirmation.text');
-        confirmDelete($title, $text);
-
         return view('dashboard.pages.alumnis.show.detail', compact('alumni'));
     }
 

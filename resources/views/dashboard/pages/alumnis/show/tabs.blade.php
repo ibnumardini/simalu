@@ -79,4 +79,9 @@
       </div>
     </div>
   </div>
+  @php
+    $title = __('messages.delete_confirmation.title');
+    $text = __('messages.delete_confirmation.text');
+    confirmDelete($title, $text);
+  @endphp
 @endsection
