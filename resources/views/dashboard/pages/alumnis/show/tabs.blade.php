@@ -9,13 +9,17 @@
       <div class="row g-2 align-items-center">
         <div class="col">
           <!-- Page pre-title -->
-          <div class="page-pretitle">
-            <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">@lang('messages.navbar.dashboard')</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a href="{{ route('alumnis.index') }}">@lang('messages.alumnis.page_title')</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">@lang('messages.alumnis.detail')</a></li>
-            </ol>
-          </div>
+          @hasSection('breadcrumb')
+            @yield('breadcrumb')
+          @else
+            <div class="page-pretitle">
+              <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">@lang('messages.navbar.dashboard')</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{ route('alumnis.index') }}">@lang('messages.alumnis.page_title')</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#">@lang('messages.alumnis.detail')</a></li>
+              </ol>
+            </div>
+          @endif
           <h2 class="page-title">
             @lang('messages.alumnis.page_title')
           </h2>
