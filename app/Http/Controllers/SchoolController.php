@@ -172,7 +172,7 @@ class SchoolController extends Controller
             Alert::toast('School updation failed!', 'error');
         }
 
-        return back();
+        return redirect()->route('schools.index');
     }
 
     /**

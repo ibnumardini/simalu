@@ -292,7 +292,7 @@ class AlumniController extends Controller
             AlertHelper::updationFailed(AlertEntity::WORK_HISTORY);
         }
 
-        return back();
+        return redirect()->route('alumnis.work-histories.show', $alumni->id);
     }
 
     /**

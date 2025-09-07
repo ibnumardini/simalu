@@ -70,7 +70,7 @@ class ProfileController extends Controller
             Alert::toast('Profile updation failed!', 'error');
         }
 
-        return back();
+        return redirect()->route('profile.index');
     }
 
     /**
@@ -113,6 +113,6 @@ class ProfileController extends Controller
             Alert::toast('User password change failed: ' . $e->getMessage(), 'error');
         }
 
-        return back();
+        return redirect()->route('profile.index');
     }
 }

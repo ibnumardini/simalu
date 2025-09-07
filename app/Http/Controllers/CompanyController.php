@@ -138,7 +138,7 @@ class CompanyController extends Controller
 
         Alert::toast('Company updated successfully!', 'success');
 
-        return back();
+        return redirect()->route('companies.index');
     }
 
     /**

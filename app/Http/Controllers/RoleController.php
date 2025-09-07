@@ -160,7 +160,7 @@ class RoleController extends Controller
             Alert::toast('Role update failed!', 'error');
         }
 
-        return back();
+        return redirect()->route('roles.index');
     }
 
     /**
