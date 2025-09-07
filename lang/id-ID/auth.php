@@ -32,7 +32,7 @@ return [
     'have_account' => 'Sudah punya akun?',
     'login_link' => 'Masuk',
     'error_title' => 'Maaf sekali…',
-    'email_placeholder' => 'email@anda.com',
+    'email_placeholder' => 'anda@email.com',
     'password_placeholder' => 'Kata sandi Anda',
     'first_name_placeholder' => 'Masukkan nama depan',
     'last_name_placeholder' => 'Masukkan nama belakang',
