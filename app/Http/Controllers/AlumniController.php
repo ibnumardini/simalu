@@ -251,7 +251,7 @@ class AlumniController extends Controller
             Alert::toast('Work history creation failed!', 'error');
         }
 
-        return back();
+        return redirect()->route('alumnis.work-histories.show', $alumni->id);
     }
 
     /**
