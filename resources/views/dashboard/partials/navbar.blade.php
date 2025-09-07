@@ -150,7 +150,7 @@
                                         href="{{ route('profile.index') }}">
                                         @lang('messages.navbar.profile')
                                     </a>
-                                    @can('view', App\Models\Role::class)
+                                    @can(config('access.roles/read'))
                                         <a class="dropdown-item {{ request()->is('*settings/roles*') ? 'active' : '' }}"
                                             href="{{ route('roles.index') }}">
                                             @lang('messages.navbar.roles')
