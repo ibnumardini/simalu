@@ -2,13 +2,13 @@
     <nav class="d-flex align-items-center">
         <div>
             <span class="small text-muted">
-                {!! __('Showing') !!}
+                {!! __('pagination.showing') !!}
                 <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
-                {!! __('to') !!}
+                {!! __('pagination.to') !!}
                 <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
-                {!! __('of') !!}
+                {!! __('pagination.of') !!}
                 <span class="fw-semibold">{{ $paginator->total() }}</span>
-                {!! __('results') !!}
+                {!! __('pagination.results') !!}
             </span>
         </div>
         <ul class="pagination m-0 ms-auto">
