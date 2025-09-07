@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Alert\AlertHelper;
+use App\Constants\AlertEntity;
 use App\Http\Requests\Alumni\AlumniStoreRequest;
 use App\Http\Requests\Alumni\AlumniUpdateRequest;
 use App\Models\Alumni;
@@ -13,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class AlumniController extends Controller
 {
@@ -119,7 +120,7 @@ class AlumniController extends Controller
         try {
             Alumni::create($dataAlumni);
 
-            Alert::toast('Alumni created successfully!', 'success');
+            AlertHelper::created(AlertEntity::ALUMNI);
 
             return redirect()->route('alumnis.index');
         } catch (Exception $e) {
@@ -167,7 +168,7 @@ class AlumniController extends Controller
         try {
             Alumni::where('id', $alumni->id)->update($dataAlumni);
 
-            Alert::toast('Alumni updated successfully!', 'success');
+            AlertHelper::updated(AlertEntity::ALUMNI);
 
             return redirect()->route('alumnis.show', $alumni->id);
         } catch (Exception $e) {
@@ -185,11 +186,11 @@ class AlumniController extends Controller
         try {
             $alumni->delete();
 
-            Alert::toast('Alumni deleted successfully!', 'success');
+            AlertHelper::deleted(AlertEntity::ALUMNI);
         } catch (Exception $e) {
             Log::error($e);
 
-            Alert::toast('Alumni deletion failed!', 'error');
+            AlertHelper::deletionFailed(AlertEntity::ALUMNI);
         }
 
         return redirect()->route('alumnis.index');
@@ -243,11 +244,11 @@ class AlumniController extends Controller
         try {
             WorkHistory::create($data->toArray());
 
-            Alert::toast('Work history creation successfully!', 'success');
+            AlertHelper::created(AlertEntity::WORK_HISTORY);
         } catch (\Exception $e) {
             Log::error($e);
 
-            Alert::toast('Work history creation failed!', 'error');
+            AlertHelper::creationFailed(AlertEntity::WORK_HISTORY);
         }
 
         return redirect()->route('alumnis.work-histories.show', $alumni->id);
@@ -288,11 +289,11 @@ class AlumniController extends Controller
         try {
             $workHistory->update($data->toArray());
 
-            Alert::toast('Work history updation successfully!', 'success');
+            AlertHelper::updated(AlertEntity::WORK_HISTORY);
         } catch (\Exception $e) {
             Log::error($e);
 
-            Alert::toast('Work history updation failed!', 'error');
+            AlertHelper::updationFailed(AlertEntity::WORK_HISTORY);
         }
 
         return back();
@@ -308,11 +309,11 @@ class AlumniController extends Controller
         try {
             $workHistory->delete();
 
-            Alert::toast('Work history deletion successfully!', 'success');
+            AlertHelper::deleted(AlertEntity::WORK_HISTORY);
         } catch (\Exception $e) {
             Log::error($e);
 
-            Alert::toast('Work history deletion failed!', 'error');
+            AlertHelper::deletionFailed(AlertEntity::WORK_HISTORY);
         }
 
         return back();

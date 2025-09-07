@@ -25,6 +25,14 @@ return [
             'evening' => 'Good Evening',
         ],
     ],
+    'alerts' => [
+        'created_successfully' => ':entity created successfully!',
+        'updated_successfully' => ':entity updated successfully!',
+        'deleted_successfully' => ':entity deleted successfully!',
+        'creation_failed' => ':entity creation failed!',
+        'updation_failed' => ':entity update failed!',
+        'deletion_failed' => ':entity deletion failed!',
+    ],
     'alumnis' => [
         'page_title' => 'Alumnis',
         'create_new_alumni' => 'Create new alumni',

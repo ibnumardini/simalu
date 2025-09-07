@@ -25,6 +25,14 @@ return [
             'evening' => 'Selamat Malam',
         ],
     ],
+    'alerts' => [
+        'created_successfully' => ':entity berhasil dibuat!',
+        'updated_successfully' => ':entity berhasil diperbarui!',
+        'deleted_successfully' => ':entity berhasil dihapus!',
+        'creation_failed' => 'Pembuatan :entity gagal!',
+        'updation_failed' => 'Pembaruan :entity gagal!',
+        'deletion_failed' => 'Penghapusan :entity gagal!',
+    ],
     'alumnis' => [
         'page_title' => 'Alumni',
         'create_new_alumni' => 'Buat alumni baru',
