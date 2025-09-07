@@ -24,15 +24,15 @@
                     <h2 class="card-title text-center mb-4">@lang('auth.register_title')</h2>
                     <div class="mb-3">
                         <label class="form-label">@lang('auth.first_name')</label>
-                        <input type="text" name="first_name" class="form-control" placeholder="@lang('auth.first_name_placeholder')">
+                        <input type="text" name="first_name" class="form-control" placeholder="@lang('auth.first_name_placeholder')" value="{{ old('first_name') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">@lang('auth.last_name')</label>
-                        <input type="text" name="last_name" class="form-control" placeholder="@lang('auth.last_name_placeholder')">
+                        <input type="text" name="last_name" class="form-control" placeholder="@lang('auth.last_name_placeholder')" value="{{ old('last_name') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">@lang('auth.email_address')</label>
-                        <input type="email" name="email" class="form-control" placeholder="@lang('auth.email_placeholder_register')">
+                        <input type="email" name="email" class="form-control" placeholder="@lang('auth.email_placeholder_register')" value="{{ old('email') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">@lang('auth.password_label')</label>

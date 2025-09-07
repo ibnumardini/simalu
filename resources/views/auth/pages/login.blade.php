@@ -26,7 +26,7 @@
                         <div class="mb-3">
                             <label class="form-label">@lang('auth.email_address')</label>
                             <input type="email" name="email" class="form-control" placeholder="@lang('auth.email_placeholder')"
-                                autocomplete="off">
+                                autocomplete="off" value="{{ old('email') }}">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">
@@ -34,7 +34,7 @@
                             </label>
                             <div class="input-group input-group-flat">
                                 <input type="password" name="password" class="form-control" placeholder="@lang('auth.password_placeholder')"
-                                    autocomplete="off">
+                                    autocomplete="off" value="{{ old('password') }}">
                             </div>
                         </div>
                         <div class="form-footer">
