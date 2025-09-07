@@ -20,9 +20,9 @@ return [
         'pretitle' => 'Selamat datang, :name',
         'title' => ':greeting',
         'greeting' => [
-            'morning' => 'Selamat pagi',
-            'afternoon' => 'Selamat siang',
-            'evening' => 'Selamat malam',
+            'morning' => 'Selamat Pagi',
+            'afternoon' => 'Selamat Siang',
+            'evening' => 'Selamat Malam',
         ],
     ],
 ];
