@@ -1,5 +1,7 @@
 <?php
 
+use App\Constants\AlertEntity;
+
 return [
     'navbar' => [
         'dashboard' => 'Dasbor',
@@ -32,6 +34,14 @@ return [
         'creation_failed' => 'Pembuatan :entity gagal!',
         'updation_failed' => 'Pembaruan :entity gagal!',
         'deletion_failed' => 'Penghapusan :entity gagal!',
+        'entities' => [
+            AlertEntity::ALUMNI => 'Alumni',
+            AlertEntity::WORK_HISTORY => 'Riwayat pekerjaan',
+            AlertEntity::SCHOOL => 'Sekolah',
+            AlertEntity::COMPANY => 'Perusahaan',
+            AlertEntity::USER => 'Pengguna',
+            AlertEntity::ROLE => 'Peran',
+        ],
     ],
     'delete_confirmation' => [
         'title' => 'Hapus Data!',

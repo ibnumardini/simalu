@@ -1,5 +1,7 @@
 <?php
 
+use App\Constants\AlertEntity;
+
 return [
     'navbar' => [
         'dashboard' => 'Dashboard',
@@ -32,6 +34,14 @@ return [
         'creation_failed' => ':entity creation failed!',
         'updation_failed' => ':entity update failed!',
         'deletion_failed' => ':entity deletion failed!',
+        'entities' => [
+            AlertEntity::ALUMNI => 'Alumni',
+            AlertEntity::WORK_HISTORY => 'Work history',
+            AlertEntity::SCHOOL => 'School',
+            AlertEntity::COMPANY => 'Company',
+            AlertEntity::USER => 'User',
+            AlertEntity::ROLE => 'Role',
+        ],
     ],
     'delete_confirmation' => [
         'title' => 'Delete Data!',
