@@ -33,6 +33,12 @@ return [
         'updation_failed' => ':entity update failed!',
         'deletion_failed' => ':entity deletion failed!',
     ],
+    'delete_confirmation' => [
+        'title' => 'Delete Data!',
+        'text' => 'Are you sure want to delete this data?',
+        'confirm_button' => 'Yes, delete it!',
+        'cancel_button' => 'Cancel',
+    ],
     'alumnis' => [
         'page_title' => 'Alumnis',
         'create_new_alumni' => 'Create new alumni',

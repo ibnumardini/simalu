@@ -22,13 +22,14 @@
                     const form = button.closest('form');
 
                     Swal.fire({
-                        title: 'Delete Data!',
-                        text: "Are you sure want to delete this data?",
+                        title: '{{ $title }}',
+                        text: '{{ $text }}',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#aaa',
-                        confirmButtonText: 'Yes, delete it!'
+                        confirmButtonText: '{{ $confirmButton }}',
+                        cancelButtonText: '{{ $cancelButton }}'
                     }).then(function(result) {
                         if (result.isConfirmed) {
                             form.submit();

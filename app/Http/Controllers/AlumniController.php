@@ -135,8 +135,8 @@ class AlumniController extends Controller
     {
         Gate::authorize('view', $alumni);
 
-        $title = 'Delete Alumni!';
-        $text = "Are you sure you want to delete?";
+        $title = __('messages.delete_confirmation.title');
+        $text = __('messages.delete_confirmation.text');
         confirmDelete($title, $text);
 
         return view('dashboard.pages.alumnis.show.detail', compact('alumni'));

@@ -33,6 +33,12 @@ return [
         'updation_failed' => 'Pembaruan :entity gagal!',
         'deletion_failed' => 'Penghapusan :entity gagal!',
     ],
+    'delete_confirmation' => [
+        'title' => 'Hapus Data!',
+        'text' => 'Apakah Anda yakin ingin menghapus data ini?',
+        'confirm_button' => 'Ya, hapus!',
+        'cancel_button' => 'Batal',
+    ],
     'alumnis' => [
         'page_title' => 'Alumni',
         'create_new_alumni' => 'Buat alumni baru',
