@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Alumnis')
+@section('title', __('messages.alumnis.page_title'))
 
 @section('content')
   <!-- Page header -->
@@ -11,12 +11,12 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Alumnis</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">@lang('messages.navbar.dashboard')</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">@lang('messages.alumnis.page_title')</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            Alumnis
+            @lang('messages.alumnis.page_title')
           </h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
@@ -29,7 +29,7 @@
                 <path d="M12 5l0 14"></path>
                 <path d="M5 12l14 0"></path>
               </svg>
-              Create new alumni
+              @lang('messages.alumnis.create_new_alumni')
             </a>
           </div>
         </div>
@@ -43,15 +43,15 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Track Your Great Alumnis</h3>
+              <h3 class="card-title">@lang('messages.alumnis.track_great_alumnis')</h3>
             </div>
             <div class="card-body border-bottom py-3">
               <div class="d-flex mb-3">
                 <form class="ms-auto" action="{{ route('alumnis.index') }}" method="get">
                   <div class="text-secondary">
-                    Search:
+                    @lang('messages.alumnis.search'):
                     <div class="ms-2 d-inline-block">
-                      <input type="text" name="q" class="form-control form-control-sm" aria-label="Search alumni"
+                      <input type="text" name="q" class="form-control form-control-sm" aria-label="{{ __('messages.alumnis.search_alumni') }}"
                         value="{{ $searchQuery }}" autofocus>
                     </div>
                     <button type="submit" class="btn btn-primary btn-sm btn-icon">
@@ -70,11 +70,11 @@
                 <table class="table table-vcenter">
                   <thead>
                     <tr>
-                      <th>Num.</th>
-                      <th>Fullname</th>
-                      <th>School</th>
-                      <th>Address</th>
-                      <th>Graduation At</th>
+                      <th>@lang('messages.alumnis.num')</th>
+                      <th>@lang('messages.alumnis.fullname')</th>
+                      <th>@lang('messages.alumnis.school')</th>
+                      <th>@lang('messages.alumnis.address')</th>
+                      <th>@lang('messages.alumnis.graduation_at')</th>
                       <th style="width: 120px"></th>
                     </tr>
                   </thead>
@@ -89,20 +89,20 @@
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                              Actions
+                              @lang('messages.alumnis.actions')
                             </button>
                             <div class="dropdown-menu">
                               <a class="dropdown-item" href="{{ route('alumnis.show', ['alumni' => $alumni->id]) }}">
-                                Detail
+                                @lang('messages.alumnis.detail')
                               </a>
                               <a class="dropdown-item" href="{{ route('alumnis.edit', ['alumni' => $alumni->id]) }}">
-                                Edit
+                                @lang('messages.alumnis.edit')
                               </a>
                               <form action="{{ route('alumnis.destroy', ['alumni' => $alumni->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="dropdown-item text-danger btn-confirm-delete">
-                                  Delete
+                                  @lang('messages.alumnis.delete')
                                 </button>
                               </form>
                             </div>
@@ -111,7 +111,7 @@
                       </tr>
                     @empty
                       <tr>
-                        <td colspan="5">No item.</td>
+                        <td colspan="5">@lang('messages.alumnis.no_item')</td>
                       </tr>
                     @endforelse
                   </tbody>

@@ -6,19 +6,19 @@
       <form class="card" action="{{ route('alumnis.work-histories.store', compact('alumni')) }}" method="post">
         @csrf
         <div class="card-header">
-          <h3 class="card-title">Create new work history</h3>
+          <h3 class="card-title">@lang('messages.alumnis.create_new_work_history')</h3>
         </div>
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-label required">Position</label>
+            <label class="form-label required">@lang('messages.alumnis.position')</label>
             <input type="text" class="form-control @error('position') is-invalid @enderror" name="position"
-              placeholder="Enter your position" value="{{ old('position') }}" required>
+              placeholder="{{ __('messages.alumnis.enter_position') }}" value="{{ old('position') }}" required>
             @error('position')
               <div class="invalid-feedback">{{ $message }}</div>
             @enderror
           </div>
           <div class="mb-3">
-            <label class="form-label required">Start at</label>
+            <label class="form-label required">@lang('messages.alumnis.start_at')</label>
             <div class="input-icon">
               <span class="input-icon-addon"><!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -33,14 +33,14 @@
                 </svg>
               </span>
               <input class="form-control @error('start_at') is-invalid @enderror" name="start_at" id="datepicker_start_at"
-                placeholder="Select a date" value="{{ old('start_at') }}" />
+                placeholder="{{ __('messages.alumnis.select_date') }}" value="{{ old('start_at') }}" />
               @error('start_at')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>
           </div>
           <div class="mb-3">
-            <label class="form-label">Resigned at</label>
+            <label class="form-label">@lang('messages.alumnis.resigned_at')</label>
             <div class="input-icon">
               <span class="input-icon-addon"><!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -55,16 +55,16 @@
                 </svg>
               </span>
               <input class="form-control @error('resigned_at') is-invalid @enderror" name="resigned_at"
-                id="datepicker_resigned_at" placeholder="Select a date" value="{{ old('resigned_at') }}" />
+                id="datepicker_resigned_at" placeholder="{{ __('messages.alumnis.select_date') }}" value="{{ old('resigned_at') }}" />
               @error('resigned_at')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>
           </div>
           <div class="mb-3">
-            <label class="form-label required">Company</label>
+            <label class="form-label required">@lang('messages.alumnis.company')</label>
             <select type="text" class="form-select @error('company') is-invalid @enderror" id="select-company"
-              name="company" placeholder="Type to search company ...">
+              name="company" placeholder="{{ __('messages.alumnis.type_to_search_company') }}">
             </select>
             @error('company')
               <div class="invalid-feedback">{{ $message }}</div>
@@ -72,8 +72,8 @@
           </div>
         </div>
         <div class="card-footer text-end">
-          <a href="{{ route('alumnis.work-histories.show', compact('alumni')) }}" class="btn btn-danger">Cancel</a>
-          <button type="submit" class="btn btn-primary">Create</button>
+          <a href="{{ route('alumnis.work-histories.show', compact('alumni')) }}" class="btn btn-danger">@lang('messages.alumnis.cancel')</a>
+          <button type="submit" class="btn btn-primary">@lang('messages.alumnis.create')</button>
         </div>
       </form>
     </div>

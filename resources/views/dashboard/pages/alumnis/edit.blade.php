@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Edit Alumni')
+@section('title', __('messages.alumnis.edit_alumni'))
 
 @section('content')
   <!-- Page header -->
@@ -11,13 +11,13 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('alumnis.index') }}">Alumnis</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Edit</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">@lang('messages.navbar.dashboard')</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('alumnis.index') }}">@lang('messages.alumnis.page_title')</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">@lang('messages.alumnis.edit')</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            Alumni
+            @lang('messages.alumnis.page_title')
           </h2>
         </div>
       </div>
@@ -32,14 +32,14 @@
             @method('PUT')
             @csrf
             <div class="card-header">
-              <h3 class="card-title">Edit new alumni</h3>
+              <h3 class="card-title">@lang('messages.alumnis.edit_new_alumni')</h3>
             </div>
             <div class="card-body">
               <div class="mb-3">
-                <label class="form-label required">Mobile number</label>
+                <label class="form-label required">@lang('messages.alumnis.mobile_number')</label>
 
                 <input type="text" inputmode="numeric" class="form-control @error('mobile') is-invalid @enderror"
-                  name="mobile" placeholder="Enter your mobile number" value="{{ old('mobile', $alumni->mobile) }}">
+                  name="mobile" placeholder="{{ __('messages.alumnis.enter_mobile_number') }}" value="{{ old('mobile', $alumni->mobile) }}">
 
                 @error('mobile')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -47,19 +47,19 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label required">Address</label>
+                <label class="form-label required">@lang('messages.alumnis.address')</label>
                 <textarea rows="5" class="form-control @error('address') is-invalid @enderror" name="address"
-                  placeholder="Enter address">{{ old('address', $alumni->address) }}</textarea>
+                  placeholder="{{ __('messages.alumnis.enter_address') }}">{{ old('address', $alumni->address) }}</textarea>
                 @error('address')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
 
               <div class="mb-3">
-                <label class="form-label required">Place of birth</label>
+                <label class="form-label required">@lang('messages.alumnis.place_of_birth')</label>
 
                 <input type="text" class="form-control @error('pob') is-invalid @enderror" name="pob"
-                  placeholder="Enter your place of birth" value="{{ old('pob', $alumni->pob) }}">
+                  placeholder="{{ __('messages.alumnis.enter_place_of_birth') }}" value="{{ old('pob', $alumni->pob) }}">
 
                 @error('pob')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -67,10 +67,10 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label required">Date of birth</label>
+                <label class="form-label required">@lang('messages.alumnis.date_of_birth')</label>
 
                 <input type="date" class="form-control @error('dob') is-invalid @enderror datepicker" name="dob"
-                  value="{{ old('dob', $alumni->dob) }}" placeholder="Enter your birthdate">
+                  value="{{ old('dob', $alumni->dob) }}" placeholder="{{ __('messages.alumnis.enter_birthdate') }}">
 
                 @error('dob')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -78,11 +78,11 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label required">Registration at</label>
+                <label class="form-label required">@lang('messages.alumnis.registration_at')</label>
 
                 <input type="text" class="form-control @error('registration_at') is-invalid @enderror datepicker"
                   name="registration_at" value="{{ old('registration_at', $alumni->registration_at) }}"
-                  placeholder="Enter your registration date">
+                  placeholder="{{ __('messages.alumnis.enter_registration_date') }}">
 
                 @error('registration_at')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -90,11 +90,11 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label required">Graduation at</label>
+                <label class="form-label required">@lang('messages.alumnis.graduation_at')</label>
 
                 <input type="text" class="form-control @error('graduation_at') is-invalid @enderror datepicker"
                   name="graduation_at" value="{{ old('graduation_at', $alumni->graduation_at) }}"
-                  placeholder="Enter your graduation date">
+                  placeholder="{{ __('messages.alumnis.enter_graduation_date') }}">
 
                 @error('graduation_at')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -102,9 +102,9 @@
               </div>
 
               <div class="mb-3">
-                <label class="form-label required">School</label>
+                <label class="form-label required">@lang('messages.alumnis.school')</label>
                 <select type="text" name="school_id" class="form-select @error('school_id') is-invalid @enderror"
-                  id="select-schools" placeholder="Type to search ...">
+                  id="select-schools" placeholder="{{ __('messages.alumnis.type_to_search') }}">
                   <option value="{{ $alumni->school_id }}" selected>{{ $alumni->school->name }}
                   </option>
 
@@ -116,9 +116,9 @@
 
               @can(config('access.alumnis/management'))
                 <div class="mb-3">
-                  <label class="form-label required">User</label>
+                  <label class="form-label required">@lang('messages.alumnis.user')</label>
                   <select type="text" name="user_id" class="form-select @error('user_id') is-invalid @enderror"
-                    id="select-users" placeholer="Type to seach ...">
+                    id="select-users" placeholder="{{ __('messages.alumnis.type_to_search') }}">
                     <option value="{{ $alumni->user_id }}" selected>{{ $alumni->user->fullName }}
                   </select>
                   @error('user_id')
@@ -129,7 +129,7 @@
 
             </div>
             <div class="card-footer text-end">
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" class="btn btn-primary">@lang('messages.alumnis.update')</button>
             </div>
           </form>
         </div>

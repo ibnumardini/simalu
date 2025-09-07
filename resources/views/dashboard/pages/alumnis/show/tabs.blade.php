@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Alumni')
+@section('title', __('messages.alumnis.page_title'))
 
 @section('content')
   <!-- Page header -->
@@ -11,13 +11,13 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a href="{{ route('alumnis.index') }}">Alumnis</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Detail</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">@lang('messages.navbar.dashboard')</a></li>
+              <li class="breadcrumb-item" aria-current="page"><a href="{{ route('alumnis.index') }}">@lang('messages.alumnis.page_title')</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">@lang('messages.alumnis.detail')</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            Alumni
+            @lang('messages.alumnis.page_title')
           </h2>
         </div>
           <div class="col-auto ms-auto d-print-none">
@@ -51,7 +51,7 @@
                       <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
                     </svg>
-                    Profile detail
+                    @lang('messages.alumnis.profile_detail')
                   </a>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -64,7 +64,7 @@
                       <path d="M12 8l0 4l2 2" />
                       <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
                     </svg>
-                    Work histories
+                    @lang('messages.alumnis.work_histories')
                   </a>
                 </li>
               </ul>
