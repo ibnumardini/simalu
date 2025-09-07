@@ -171,7 +171,6 @@ class AlumniController extends Controller
 
             return redirect()->route('alumnis.show', $alumni->id);
         } catch (Exception $e) {
-            dd($e);
             return back()->withErrors($e->getMessage());
         }
     }
