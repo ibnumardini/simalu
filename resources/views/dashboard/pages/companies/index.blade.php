@@ -77,7 +77,7 @@
                                             <th>Num.</th>
                                             <th>Name</th>
                                             <th>Address</th>
-                                            <th>Photos</th>
+                                            <th style="width: 150px">Photos</th>
                                             <th class="w-1"></th>
                                         </tr>
                                     </thead>
