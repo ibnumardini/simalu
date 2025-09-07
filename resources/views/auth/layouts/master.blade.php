@@ -25,10 +25,13 @@
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
     </style>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
+      />
   </head>
   <body  class=" d-flex flex-column">
     @yield('content')
-
     <!-- Tabler Core -->
     <script src="{{ asset('/js/tabler.min.js') }}" defer></script>
   </body>

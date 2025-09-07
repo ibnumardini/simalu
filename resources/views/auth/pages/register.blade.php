@@ -1,20 +1,13 @@
 @extends('auth.layouts.master')
 
-@section('title', 'Sign-up')
+@section('title', __('auth.register_title'))
 
 @section('content')
     <div class="page page-center">
         <div class="container container-tight py-4">
-            <div class="text-center mb-4">
-                <span class="navbar-brand navbar-brand-autodark">
-                    <img src="{{ asset('img/simalu.png') }}" alt="{{ config('app.name') }}" width="24" height="24">
-                    <span class="fs-1 text-uppercase">{{ config('app.name') }}</span>
-                </span>
-            </div>
-
             @if ($errors->any())
                 <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-title">I'm so sorry…</h4>
+                    <h4 class="alert-title">@lang('auth.error_title')</h4>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>
@@ -24,44 +17,44 @@
                     </ul>
                 </div>
             @endif
-
             <form class="card card-md" action="{{ route('register') }}" method="post" autocomplete="off" novalidate>
                 @csrf
+                @include('auth.partials.card-header')
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Create new account</h2>
+                    <h2 class="card-title text-center mb-4">@lang('auth.register_title')</h2>
                     <div class="mb-3">
-                        <label class="form-label">First name</label>
-                        <input type="text" name="first_name" class="form-control" placeholder="Enter first name">
+                        <label class="form-label">@lang('auth.first_name')</label>
+                        <input type="text" name="first_name" class="form-control" placeholder="@lang('auth.first_name_placeholder')">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Last name</label>
-                        <input type="text" name="last_name" class="form-control" placeholder="Enter last name">
+                        <label class="form-label">@lang('auth.last_name')</label>
+                        <input type="text" name="last_name" class="form-control" placeholder="@lang('auth.last_name_placeholder')">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter email">
+                        <label class="form-label">@lang('auth.email_address')</label>
+                        <input type="email" name="email" class="form-control" placeholder="@lang('auth.email_placeholder_register')">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
+                        <label class="form-label">@lang('auth.password_label')</label>
                         <div class="input-group input-group-flat">
-                            <input type="password" name="password" class="form-control" placeholder="Password"
+                            <input type="password" name="password" class="form-control" placeholder="@lang('auth.password_placeholder_register')"
                                 autocomplete="off">
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password confirmation</label>
+                        <label class="form-label">@lang('auth.password_confirmation')</label>
                         <div class="input-group input-group-flat">
                             <input type="password" name="password_confirmation" class="form-control"
-                                placeholder="Password confirmation" autocomplete="off">
+                                placeholder="@lang('auth.password_confirmation_placeholder')" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Create new account</button>
+                        <button type="submit" class="btn btn-primary w-100">@lang('auth.register_button')</button>
                     </div>
                 </div>
             </form>
             <div class="text-center text-secondary mt-3">
-                Already have account? <a href="{{ route('login') }}" tabindex="-1">Login</a>
+                @lang('auth.have_account') <a href="{{ route('login') }}" tabindex="-1">@lang('auth.login_link')</a>
             </div>
         </div>
     </div>

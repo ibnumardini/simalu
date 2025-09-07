@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
 Route::redirect("/", "/dashboard");
+Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
 Route::middleware('auth')->group(function () {
     Route::get("/dashboard", [DashboardController::class, "index"])->name('dashboard');
@@ -56,7 +57,5 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('alumnis', AlumniController::class);
-
-    Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 });
  
