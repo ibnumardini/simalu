@@ -21,7 +21,7 @@
                 @csrf
                 @include('auth.partials.card-header')
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4">@lang('auth.register_title')</h2>
+                    <h2 class="h2 text-center mb-4">@lang('auth.register_title')</h2>
                     <div class="mb-3">
                         <label class="form-label">@lang('auth.first_name')</label>
                         <input type="text" name="first_name" class="form-control" placeholder="@lang('auth.first_name_placeholder')" value="{{ old('first_name') }}">
