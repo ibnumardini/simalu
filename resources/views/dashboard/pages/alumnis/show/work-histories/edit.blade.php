@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="card-footer text-end">
-          <a href="{{ route('alumnis.work-histories.show', compact('alumni')) }}" class="btn btn-danger">@lang('messages.alumnis.cancel')</a>
+          <a href="{{ route('alumnis.work-histories.show', compact('alumni')) }}" class="btn btn-secondary">@lang('messages.alumnis.cancel')</a>
           <button type="submit" class="btn btn-primary">@lang('messages.alumnis.update')</button>
         </div>
       </form>

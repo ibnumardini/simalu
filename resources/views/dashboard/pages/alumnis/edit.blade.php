@@ -129,7 +129,7 @@
 
             </div>
             <div class="card-footer text-end">
-              <a href="{{ route('alumnis.index') }}" class="btn btn-danger">@lang('messages.alumnis.cancel')</a>
+              <a href="{{ route('alumnis.index') }}" class="btn btn-secondary">@lang('messages.alumnis.cancel')</a>
               <button type="submit" class="btn btn-primary">@lang('messages.alumnis.update')</button>
             </div>
           </form>

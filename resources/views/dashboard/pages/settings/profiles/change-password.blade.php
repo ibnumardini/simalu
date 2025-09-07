@@ -42,7 +42,7 @@
     </div>
     <div class="card-footer bg-transparent mt-auto">
       <div class="btn-list justify-content-end">
-        <a href="{{ route('profile.index') }}" class="btn btn-danger">Cancel</a>
+        <a href="{{ route('profile.index') }}" class="btn btn-secondary">Cancel</a>
         <button type="submit" class="btn btn-primary">
           Save changes
         </button>

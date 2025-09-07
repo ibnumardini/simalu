@@ -74,6 +74,7 @@
               </div>
             </div>
             <div class="card-footer text-end">
+              <a href="{{ route('roles.index') }}" class="btn btn-secondary">Cancel</a>
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>
