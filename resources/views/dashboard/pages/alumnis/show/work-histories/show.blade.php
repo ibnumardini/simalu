@@ -1,16 +1,5 @@
 @extends('dashboard.pages.alumnis.show.tabs')
 
-@section('breadcrumb')
-  <div class="page-pretitle">
-    <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-      <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">@lang('messages.navbar.dashboard')</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('alumnis.index') }}">@lang('messages.alumnis.page_title')</a></li>
-      <li class="breadcrumb-item"><a href="{{ route('alumnis.show', ['alumni' => $alumni->id]) }}">@lang('messages.alumnis.detail')</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="#">@lang('messages.alumnis.work_histories')</a></li>
-    </ol>
-  </div>
-@endsection
-
 @section('alumni-show-contents')
   <div class="tab-pane active show" id="tabs-2" role="tabpanel">
     <div class="row row-cards">
