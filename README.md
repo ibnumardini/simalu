@@ -12,7 +12,7 @@
 #### SIMALU aka. Sistem Informasi Management Alumni is specialized software crafted to assist educational institutions and organizations in effectively overseeing alumni relations.
 
 ## Screenshots
-![SIMALU Login](public/img/screenshot/1-login.webp)
+![SIMALU](public/img/screenshot/3-list-of-alumnis.webp)
 
 Want to see more? Check out our [complete application screenshots](SCREENSHOT.md) to explore all the features and interfaces.
 
