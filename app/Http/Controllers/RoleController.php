@@ -91,7 +91,7 @@ class RoleController extends Controller
             Alert::toast('Role creation failed!', 'error');
         }
 
-        return back();
+        return redirect()->route('roles.index');
     }
 
     /**
