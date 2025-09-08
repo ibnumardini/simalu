@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Edit Company')
+@section('title', __('messages.companies.edit_company'))
 
 @section('content')
     <!-- Page header -->
@@ -11,13 +11,13 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
                         <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('companies.index') }}">Companies</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="#">Edit</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('messages.companies.breadcrumb_dashboard') }}</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('companies.index') }}">{{ __('messages.companies.breadcrumb_companies') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ __('messages.companies.breadcrumb_edit') }}</a></li>
                         </ol>
                     </div>
                     <h2 class="page-title">
-                        Company
+                        {{ __('messages.companies.company') }}
                     </h2>
                 </div>
             </div>
@@ -37,14 +37,14 @@
                         @csrf
                         @method('PUT')
                         <div class="card-header">
-                            <h3 class="card-title">Edit company {{ $company->name }}</h3>
+                            <h3 class="card-title">{{ __('messages.companies.edit_company_name', ['name' => $company->name]) }}</h3>
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="form-label required">Name</label>
+                                <label class="form-label required">{{ __('messages.companies.name') }}</label>
                                 <div>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" aria-describedby="emailHelp" placeholder="Enter name"
+                                        name="name" aria-describedby="emailHelp" placeholder="{{ __('messages.companies.enter_name') }}"
                                         value="{{ old('name') ?? $company->name }}" required>
                                 </div>
                                 @error('name')
@@ -52,26 +52,26 @@
                                 @enderror
                             </div>
                             <div class="mb-3 mb-0">
-                                <label class="form-label required">Address</label>
+                                <label class="form-label required">{{ __('messages.companies.address') }}</label>
                                 <textarea rows="5" class="form-control @error('address') is-invalid @enderror" name="address"
-                                    placeholder="Enter address">{{ old('address') ?? $company->address }}</textarea>
+                                    placeholder="{{ __('messages.companies.enter_address') }}">{{ old('address') ?? $company->address }}</textarea>
                                 @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <div class="form-label">Photos</div>
+                                <div class="form-label">{{ __('messages.companies.photos') }}</div>
                                 <input type="file" class="form-control @error('photos') is-invalid @enderror"
                                     name="photos[]" accept="image/gif,image/jpg,image/jpeg,image/png" multiple />
-                                <div id="photosHelp" class="form-text">The uploaded photo will replace all previously uploaded photos.</div>
+                                <div id="photosHelp" class="form-text">{{ __('messages.companies.photos_help') }}</div>
                                 @error('photos')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="card-footer text-end">
-                            <a href="{{ route('companies.index') }}" class="btn btn-secondary">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{ route('companies.index') }}" class="btn btn-secondary">{{ __('messages.companies.cancel') }}</a>
+                            <button type="submit" class="btn btn-primary">{{ __('messages.companies.update') }}</button>
                         </div>
                     </form>
                 </div>
