@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Schools')
+@section('title', __('messages.schools.page_title'))
 
 @section('content')
     <!-- Page header -->
@@ -11,12 +11,12 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
                         <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="#">Schools</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('messages.schools.breadcrumb_dashboard') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ __('messages.schools.breadcrumb_schools') }}</a></li>
                         </ol>
                     </div>
                     <h2 class="page-title">
-                        Schools
+                        {{ __('messages.schools.page_title') }}
                     </h2>
                 </div>
                 @can(config('access.schools/create'))
@@ -31,7 +31,7 @@
                                     <path d="M12 5l0 14"></path>
                                     <path d="M5 12l14 0"></path>
                                 </svg>
-                                Create new school
+                                {{ __('messages.schools.create_new_school') }}
                             </a>
                         </div>
                     </div>
@@ -46,16 +46,16 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Track Your Great School</h3>
+                            <h3 class="card-title">{{ __('messages.schools.track_great_schools') }}</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex mb-3">
                                 <form class="ms-auto" action="{{ route('schools.index') }}" method="get">
                                     <div class="text-secondary">
-                                        Search:
+                                        {{ __('messages.schools.search') }}:
                                         <div class="ms-2 d-inline-block">
                                             <input type="text" name="q" class="form-control form-control-sm"
-                                                aria-label="Search school" value="{{ $searchQuery }}">
+                                                aria-label="{{ __('messages.schools.search_school') }}" value="{{ $searchQuery }}">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-sm btn-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -74,10 +74,10 @@
                                 <table class="table table-vcenter">
                                     <thead>
                                         <tr>
-                                            <th>Num.</th>
-                                            <th>Name</th>
-                                            <th>Stage</th>
-                                            <th class="w-50">Address</th>
+                                            <th>{{ __('messages.schools.num') }}</th>
+                                            <th>{{ __('messages.schools.name') }}</th>
+                                            <th>{{ __('messages.schools.stage') }}</th>
+                                            <th class="w-50">{{ __('messages.schools.address') }}</th>
                                             <th class="w-1"></th>
                                         </tr>
                                     </thead>
@@ -94,17 +94,17 @@
                                                     <div class="dropdown">
                                                         <button type="button" class="btn dropdown-toggle"
                                                             data-bs-toggle="dropdown">
-                                                            Actions
+                                                            {{ __('messages.schools.actions') }}
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
                                                                 href="{{ route('schools.show', ['school' => $school->id]) }}">
-                                                                Detail
+                                                                {{ __('messages.schools.detail') }}
                                                             </a>
                                                             @can(config('access.schools/update'))
                                                                 <a class="dropdown-item"
                                                                     href="{{ route('schools.edit', ['school' => $school->id]) }}">
-                                                                    Edit
+                                                                    {{ __('messages.schools.edit') }}
                                                                 </a>
                                                             @endcan
                                                             @can(config('access.schools/delete'))
@@ -112,7 +112,7 @@
                                                                     @csrf
                                                                     @method('delete')
                                                                     <button type="submit" class="dropdown-item text-danger btn-confirm-delete">
-                                                                        Delete
+                                                                        {{ __('messages.schools.delete') }}
                                                                     </button>
                                                                 </form>
                                                             @endcan
@@ -122,7 +122,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5">No item.</td>
+                                                <td colspan="5">{{ __('messages.schools.no_item') }}</td>
                                             </tr>
                                         @endforelse
                                     </tbody>

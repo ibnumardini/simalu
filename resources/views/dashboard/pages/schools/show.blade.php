@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Schools')
+@section('title', __('messages.schools.page_title'))
 
 @section('content')
   <!-- Page header -->
@@ -11,13 +11,13 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a href="{{ route('schools.index') }}">Schools</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Detail</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('messages.schools.breadcrumb_dashboard') }}</a></li>
+              <li class="breadcrumb-item" aria-current="page"><a href="{{ route('schools.index') }}">{{ __('messages.schools.breadcrumb_schools') }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ __('messages.schools.breadcrumb_detail') }}</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            Company
+            {{ __('messages.schools.school') }}
           </h2>
         </div>
       </div>
@@ -35,21 +35,21 @@
             <div class="card-body border-bottom py-3">
               <table class="table">
                 <tr>
-                  <td scope="col">Name</td>
+                  <td scope="col">{{ __('messages.schools.name') }}</td>
                   <td scope="col">{{ $school->name }}</td>
                 </tr>
                 <tr>
-                  <td scope="col">Stage</td>
+                  <td scope="col">{{ __('messages.schools.stage') }}</td>
                   <td scope="col">
                     <span class="badge badge-secondary text-uppercase">{{ $school->stage }}</span>
                   </td>
                 </tr>
                 <tr>
-                  <td scope="col">Address</td>
+                  <td scope="col">{{ __('messages.schools.address') }}</td>
                   <td scope="col">{{ $school->address }}</td>
                 </tr>
                 <tr>
-                  <td scope="col">Photos</td>
+                  <td scope="col">{{ __('messages.schools.photos') }}</td>
                   <td scope="col">
                     <div class="row row-cols-6 g-3">
                       @forelse ($school->photos as $photo)
@@ -61,7 +61,7 @@
                           </a>
                         </div>
                       @empty
-                        <p class="text-muted">No photos</p>
+                        <p class="text-muted">{{ __('messages.schools.no_photos') }}</p>
                       @endforelse
                     </div>
                   </td>

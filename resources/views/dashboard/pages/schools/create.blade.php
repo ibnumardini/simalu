@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Create School')
+@section('title', __('messages.schools.create_school'))
 
 @section('content')
   <!-- Page header -->
@@ -11,13 +11,13 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('schools.index') }}">Schools</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Create</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('messages.schools.breadcrumb_dashboard') }}</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('schools.index') }}">{{ __('messages.schools.breadcrumb_schools') }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ __('messages.schools.breadcrumb_create') }}</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            School
+            {{ __('messages.schools.school') }}
           </h2>
         </div>
       </div>
@@ -31,28 +31,28 @@
           <form class="card" action="{{ route('schools.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-header">
-              <h3 class="card-title">Create new school</h3>
+              <h3 class="card-title">{{ __('messages.schools.create_new_school_form') }}</h3>
             </div>
             <div class="card-body" id="form-input-area">
               <div class="mb-3">
-                <label class="form-label required">Name</label>
+                <label class="form-label required">{{ __('messages.schools.name') }}</label>
                 <div>
                   <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                    aria-describedby="emailHelp" placeholder="Enter name" value="{{ old('name') }}" required>
+                    aria-describedby="emailHelp" placeholder="{{ __('messages.schools.enter_name') }}" value="{{ old('name') }}" required>
                 </div>
                 @error('name')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
               <div class="mb-3">
-                <label class="form-label required">Stage</label>
+                <label class="form-label required">{{ __('messages.schools.stage') }}</label>
                 <select type="text" name="stage" class="form-select @error('stage') is-invalid @enderror"
                   id="select-stage" required>
                   <option value="formal" {{ old('stage') == 'formal' ? 'selected' : '' }}>
-                    Formal
+                    {{ __('messages.schools.stage_formal') }}
                   </option>
                   <option value="non-formal" {{ old('stage') == 'non-formal' ? 'selected' : '' }}>
-                    Non-Formal
+                    {{ __('messages.schools.stage_non_formal') }}
                   </option>
                 </select>
                 @error('stage')
@@ -60,22 +60,22 @@
                 @enderror
               </div>
               <div class="mb-3">
-                <label class="form-label required">Address</label>
+                <label class="form-label required">{{ __('messages.schools.address') }}</label>
                 <textarea rows="5" class="form-control @error('address') is-invalid @enderror" name="address"
-                  placeholder="Enter address" required>{{ old('name') }}</textarea>
+                  placeholder="{{ __('messages.schools.enter_address') }}" required>{{ old('name') }}</textarea>
                 @error('address')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
               <div class="mb-3">
-                <div class="form-label">Photos</div>
+                <div class="form-label">{{ __('messages.schools.photos') }}</div>
                 <input type="file" class="form-control" name="photos[]"
                   accept="image/gif,image/jpg,image/jpeg,image/png" multiple>
               </div>
             </div>
             <div class="card-footer text-end">
-              <a href="{{ route('schools.index') }}" class="btn btn-secondary">Cancel</a>
-              <button type="submit" class="btn btn-primary">Create</button>
+              <a href="{{ route('schools.index') }}" class="btn btn-secondary">{{ __('messages.schools.cancel') }}</a>
+              <button type="submit" class="btn btn-primary">{{ __('messages.schools.create') }}</button>
             </div>
           </form>
         </div>
