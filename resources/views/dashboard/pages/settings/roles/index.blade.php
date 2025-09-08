@@ -96,7 +96,7 @@
                               <form action="{{ route('roles.destroy', ['role' => $role->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="dropdown-item text-danger">
+                                <button type="submit" class="dropdown-item text-danger btn-confirm-delete">
                                   {{ __('messages.settings.roles.delete') }}
                                 </button>
                               </form>
@@ -122,3 +122,7 @@
     </div>
   </div>
 @endsection
+
+@push('scripts')
+  <x-form-delete-confirmation target=".btn-confirm-delete" />
+@endpush
