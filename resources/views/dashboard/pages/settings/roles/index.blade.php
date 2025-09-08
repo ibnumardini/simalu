@@ -1,6 +1,6 @@
 @extends('dashboard.pages.settings.layouts.master')
 
-@section('title', 'Roles')
+@section('title', __('messages.settings.roles.page_title'))
 
 @section('content-settings')
   <!-- Page header -->
@@ -11,12 +11,12 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Roles</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('messages.settings.roles.breadcrumb_dashboard') }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ __('messages.settings.roles.breadcrumb_roles') }}</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            Roles
+            {{ __('messages.settings.roles.page_title') }}
           </h2>
         </div>
         <div class="col-auto ms-auto d-print-none">
@@ -29,7 +29,7 @@
                 <path d="M12 5l0 14"></path>
                 <path d="M5 12l14 0"></path>
               </svg>
-              Create new role
+              {{ __('messages.settings.roles.create_new_role') }}
             </a>
           </div>
         </div>
@@ -43,15 +43,15 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Track Your Great Roles</h3>
+              <h3 class="card-title">{{ __('messages.settings.roles.track_great_roles') }}</h3>
             </div>
             <div class="card-body border-bottom py-3">
               <div class="d-flex mb-3">
                 <form class="ms-auto" action="{{ route('roles.index') }}" method="get">
                   <div class="text-secondary">
-                    Search:
+                    {{ __('messages.settings.roles.search') }}:
                     <div class="ms-2 d-inline-block">
-                      <input type="text" name="q" class="form-control form-control-sm" aria-label="Search role"
+                      <input type="text" name="q" class="form-control form-control-sm" aria-label="{{ __('messages.settings.roles.search_role') }}"
                         value="{{ $searchQuery }}" autofocus>
                     </div>
                     <button type="submit" class="btn btn-primary btn-sm btn-icon">
@@ -70,10 +70,10 @@
                 <table class="table table-vcenter">
                   <thead>
                     <tr>
-                      <th>Num.</th>
-                      <th>Name</th>
-                      <th>Guard name</th>
-                      <th>Created at</th>
+                      <th>{{ __('messages.settings.roles.num') }}</th>
+                      <th>{{ __('messages.settings.roles.name') }}</th>
+                      <th>{{ __('messages.settings.roles.guard_name') }}</th>
+                      <th>{{ __('messages.settings.roles.created_at') }}</th>
                       <th style="width: 120px"></th>
                     </tr>
                   </thead>
@@ -87,17 +87,17 @@
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                              Actions
+                              {{ __('messages.settings.roles.actions') }}
                             </button>
                             <div class="dropdown-menu">
                               <a class="dropdown-item" href="{{ route('roles.edit', ['role' => $role->id]) }}">
-                                Edit
+                                {{ __('messages.settings.roles.edit') }}
                               </a>
                               <form action="{{ route('roles.destroy', ['role' => $role->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="dropdown-item text-danger">
-                                  Delete
+                                  {{ __('messages.settings.roles.delete') }}
                                 </button>
                               </form>
                             </div>
@@ -106,7 +106,7 @@
                       </tr>
                     @empty
                       <tr>
-                        <td colspan="5">No item.</td>
+                        <td colspan="5">{{ __('messages.settings.roles.no_item') }}</td>
                       </tr>
                     @endforelse
                   </tbody>

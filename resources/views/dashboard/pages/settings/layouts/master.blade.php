@@ -35,7 +35,7 @@
                 <div class="list-group list-group-transparent">
                   <a href="{{ route('roles.index') }}"
                     class="list-group-item list-group-item-action d-flex align-items-center {{ request()->is('*settings/roles*') ? 'active' : '' }}">
-                    {{ __('messages.settings.roles') }}
+                    {{ __('messages.settings.roles.page_title') }}
                   </a>
                 </div>
               @endcan

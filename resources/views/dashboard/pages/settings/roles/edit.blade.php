@@ -1,6 +1,6 @@
 @extends('dashboard.pages.settings.layouts.master')
 
-@section('title', 'Edit Role')
+@section('title', __('messages.settings.roles.edit_role'))
 
 @section('content-settings')
   <!-- Page header -->
@@ -11,13 +11,13 @@
           <!-- Page pre-title -->
           <div class="page-pretitle">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="#">Edit</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('messages.settings.roles.breadcrumb_dashboard') }}</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">{{ __('messages.settings.roles.breadcrumb_roles') }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ __('messages.settings.roles.breadcrumb_edit') }}</a></li>
             </ol>
           </div>
           <h2 class="page-title">
-            Role
+            {{ __('messages.settings.roles.role') }}
           </h2>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <div class="col-12">
           @if ($errors->has('permissions'))
             <div class="alert alert-danger" role="alert">
-              <h4 class="alert-title">I'm so sorry…</h4>
+              <h4 class="alert-title">{{ __('messages.settings.roles.alert_title') }}</h4>
               <ul>
                 @foreach ($errors->get('permissions') as $error)
                   <li>
@@ -44,18 +44,18 @@
             @csrf
             @method('put')
             <div class="card-header">
-              <h3 class="card-title">Edit new role</h3>
+              <h3 class="card-title">{{ __('messages.settings.roles.edit_new_role') }}</h3>
             </div>
             <div class="card-body">
               <div class="mb-3">
-                <label class="form-label required">Name</label>
+                <label class="form-label required">{{ __('messages.settings.roles.name') }}</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                  placeholder="Enter name" value="{{ old('name') ?? $role->name }}">
+                  placeholder="{{ __('messages.settings.roles.enter_name') }}" value="{{ old('name') ?? $role->name }}">
                 @error('name')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
-              <label class="form-label">Permissions</label>
+              <label class="form-label">{{ __('messages.settings.roles.permissions') }}</label>
               <div class="card">
                 <div class="card-body">
                   @foreach ($permissions as $page => $scopes)
@@ -74,8 +74,8 @@
               </div>
             </div>
             <div class="card-footer text-end">
-              <a href="{{ route('roles.index') }}" class="btn btn-secondary">Cancel</a>
-              <button type="submit" class="btn btn-primary">Update</button>
+              <a href="{{ route('roles.index') }}" class="btn btn-secondary">{{ __('messages.settings.roles.cancel') }}</a>
+              <button type="submit" class="btn btn-primary">{{ __('messages.settings.roles.update') }}</button>
             </div>
           </form>
         </div>
