@@ -246,4 +246,12 @@ return [
             'breadcrumb_edit' => 'Edit',
         ],
     ],
+    'footer' => [
+        'copyright' => 'Hak cipta © :year',
+        'all_rights_reserved' => 'Semua hak dilindungi.',
+        'app_developed' => 'Aplikasi dikembangkan dengan',
+        'developed_by' => 'oleh',
+        'and_contributors' => '& semua',
+        'contributors' => 'kontributor keren',
+    ],
 ];

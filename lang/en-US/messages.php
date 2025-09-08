@@ -246,4 +246,12 @@ return [
             'breadcrumb_edit' => 'Edit',
         ],
     ],
+    'footer' => [
+        'copyright' => 'Copyright © :year',
+        'all_rights_reserved' => 'All rights reserved.',
+        'app_developed' => 'App developed w/',
+        'developed_by' => 'by',
+        'and_contributors' => '& all the coolest',
+        'contributors' => 'contributors',
+    ],
 ];
