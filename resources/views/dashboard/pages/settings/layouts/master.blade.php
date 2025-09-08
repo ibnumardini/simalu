@@ -7,10 +7,10 @@
       <div class="row g-2 align-items-center">
         <div class="col">
           <div class="page-pretitle">
-            Your Personalization
+            {{ __('messages.settings.your_personalization') }}
           </div>
           <h2 class="page-title">
-            Settings
+            {{ __('messages.settings.settings') }}
           </h2>
         </div>
       </div>
@@ -23,19 +23,19 @@
         <div class="row g-0">
           <div class="col-12 col-md-3 border-end">
             <div class="card-body">
-              <h4 class="subheader">Mine 🐱</h4>
+              <h4 class="subheader">{{ __('messages.settings.mine') }}</h4>
               <div class="list-group list-group-transparent">
                 <a href="{{ route('profile.index') }}"
                   class="list-group-item list-group-item-action d-flex align-items-center {{ request()->is('*settings/profile*') ? 'active' : '' }}">
-                  My Account
+                  {{ __('messages.settings.my_account') }}
                 </a>
               </div>
-              <h4 class="subheader mt-4">Management</h4>
+              <h4 class="subheader mt-4">{{ __('messages.settings.management') }}</h4>
               @can(config('access.roles/read'))
                 <div class="list-group list-group-transparent">
                   <a href="{{ route('roles.index') }}"
                     class="list-group-item list-group-item-action d-flex align-items-center {{ request()->is('*settings/roles*') ? 'active' : '' }}">
-                    Roles
+                    {{ __('messages.settings.roles') }}
                   </a>
                 </div>
               @endcan
