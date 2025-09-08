@@ -86,7 +86,7 @@ class SchoolController extends Controller
             Log::error($e);
         }
 
-        return back();
+        return redirect()->route('schools.index');
     }
 
     /**
