@@ -31,7 +31,7 @@
                 </a>
               </div>
               <h4 class="subheader mt-4">Management</h4>
-              @can('view', App\Models\Role::class)
+              @can(config('access.roles/read'))
                 <div class="list-group list-group-transparent">
                   <a href="{{ route('roles.index') }}"
                     class="list-group-item list-group-item-action d-flex align-items-center {{ request()->is('*settings/roles*') ? 'active' : '' }}">
