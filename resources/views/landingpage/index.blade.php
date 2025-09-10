@@ -195,78 +195,25 @@
                 <p class="lead text-muted">Bergabunglah dengan alumni sukses dari berbagai sekolah</p>
             </div>
             <div class="row g-4 py-5">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
-                        <div class="card-body text-center p-5">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Foto Alumni" class="rounded-circle mb-3"
-                                width="120" height="120">
-                            <h5 class="card-title mb-2">Ahmad Wijaya</h5>
-                            <p class="text-muted mb-2"><i class="bi-mortarboard me-1"></i>SMK Negeri 1 Jakarta -
-                                Angkatan 2013</p>
-                            <p class="text-primary mb-0"><i class="bi-building me-1"></i>PT. Telkom Indonesia</p>
+                @foreach ($alumnis as $alumni)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
+                            <div class="card-body text-center p-5">
+                                <img src="{{ $alumni->user->avatar ? asset('storage/' . $alumni->user->avatar) : asset('img/avatar.png') }}"
+                                    alt="Foto Alumni" class="rounded-circle mb-3" width="120" height="120">
+                                <h5 class="card-title mb-2">{{ $alumni->user->name }}</h5>
+                                <p class="text-muted mb-2">
+                                    <i class="bi-mortarboard me-1"></i>
+                                    {{ $alumni->school->name }} - Angkatan {{ $alumni->cohort }}
+                                </p>
+                                <p class="text-primary mb-0">
+                                    <i class="bi-building me-1"></i>
+                                    {{ $alumni->latestWorkHistory->company->name ?? '[Tidak Diketahui]' }}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
-                        <div class="card-body text-center p-5">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Foto Alumni" class="rounded-circle mb-3"
-                                width="120" height="120">
-                            <h5 class="card-title mb-2">Siti Aminah</h5>
-                            <p class="text-muted mb-2"><i class="bi-mortarboard me-1"></i>SMK Bina Nusantara -
-                                Angkatan 2014</p>
-                            <p class="text-primary mb-0"><i class="bi-building me-1"></i>Bank Central Asia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
-                        <div class="card-body text-center p-5">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Foto Alumni" class="rounded-circle mb-3"
-                                width="120" height="120">
-                            <h5 class="card-title mb-2">Budi Pratama</h5>
-                            <p class="text-muted mb-2"><i class="bi-mortarboard me-1"></i>SMK Teknologi Bandung -
-                                Angkatan 2015</p>
-                            <p class="text-primary mb-0"><i class="bi-building me-1"></i>Gojek Indonesia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
-                        <div class="card-body text-center p-5">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Foto Alumni" class="rounded-circle mb-3"
-                                width="120" height="120">
-                            <h5 class="card-title mb-2">Dewi Fatimah</h5>
-                            <p class="text-muted mb-2"><i class="bi-mortarboard me-1"></i>SMK Multimedia Surabaya -
-                                Angkatan 2016</p>
-                            <p class="text-primary mb-0"><i class="bi-building me-1"></i>Tokopedia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
-                        <div class="card-body text-center p-5">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Foto Alumni" class="rounded-circle mb-3"
-                                width="120" height="120">
-                            <h5 class="card-title mb-2">Rizky Hidayat</h5>
-                            <p class="text-muted mb-2"><i class="bi-mortarboard me-1"></i>SMK Negeri 2 Yogyakarta -
-                                Angkatan 2017</p>
-                            <p class="text-primary mb-0"><i class="bi-building me-1"></i>Shopee Indonesia</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card alumni-card h-100 shadow-sm border-0 rounded-3">
-                        <div class="card-body text-center p-5">
-                            <img src="{{ asset('img/avatar.png') }}" alt="Foto Alumni" class="rounded-circle mb-3"
-                                width="120" height="120">
-                            <h5 class="card-title mb-2">Maya Sari</h5>
-                            <p class="text-muted mb-2"><i class="bi-mortarboard me-1"></i>SMK Bisnis Manajemen -
-                                Angkatan 2018</p>
-                            <p class="text-primary mb-0"><i class="bi-building me-1"></i>Grab Indonesia</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="text-center mt-6">
                 <button class="btn btn-primary btn-lg rounded-pill px-4">

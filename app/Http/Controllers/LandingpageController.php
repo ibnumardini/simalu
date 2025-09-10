@@ -14,6 +14,8 @@ class LandingpageController extends Controller
         $companiesCount = Company::count();
         $schoolsCount = School::count();
 
-        return view('landingpage.index', compact('alumnisCount', 'companiesCount', 'schoolsCount'));
+        $alumnis = Alumni::with(['user', 'school', 'latestWorkHistory'])->inRandomOrder()->take(6)->get();
+
+        return view('landingpage.index', compact('alumnisCount', 'companiesCount', 'schoolsCount', 'alumnis'));
     }
 }

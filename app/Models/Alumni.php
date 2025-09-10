@@ -37,4 +37,20 @@ class Alumni extends Model
     {
         return $this->hasMany(WorkHistory::class);
     }
+
+    /**
+     * Get the latest work history associated with the alumni.
+     */
+    public function latestWorkHistory()
+    {
+        return $this->hasOne(WorkHistory::class)->latestOfMany();
+    }
+
+    /**
+     * Accessor to get the cohort year from registration_at
+     */
+    public function getCohortAttribute()
+    {
+        return date('Y', strtotime($this->registration_at));
+    }
 }
