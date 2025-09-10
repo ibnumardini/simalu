@@ -148,19 +148,37 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="text-white px-3">
-                                <h1 class="display-3 fw-bold mb-3">1,250+</h1>
+                                <h1 class="display-3 fw-bold mb-3">
+                                    @if ($alumnisCount > 0)
+                                        {{ $alumnisCount - 1 }}+
+                                    @else
+                                        0
+                                    @endif
+                                </h1>
                                 <p class="fs-5 mb-0">Alumni Terdaftar</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-white px-3">
-                                <h1 class="display-3 fw-bold mb-3">350+</h1>
+                                <h1 class="display-3 fw-bold mb-3">
+                                    @if ($companiesCount > 0)
+                                        {{ $companiesCount - 1 }}+
+                                    @else
+                                        0
+                                    @endif
+                                </h1>
                                 <p class="fs-5 mb-0">Perusahaan Tergabung</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-white px-3">
-                                <h1 class="display-3 fw-bold mb-3">25+</h1>
+                                <h1 class="display-3 fw-bold mb-3">
+                                    @if ($schoolsCount > 0)
+                                        {{ $schoolsCount - 1 }}+
+                                    @else
+                                        0
+                                    @endif
+                                </h1>
                                 <p class="fs-5 mb-0">Sekolah Tergabung</p>
                             </div>
                         </div>
