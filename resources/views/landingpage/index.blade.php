@@ -35,9 +35,15 @@
                 <a href="#page-top" class="nav-link me-4 text-dark fw-semibold text-decoration-none">Beranda</a>
                 <a href="#alumni" class="nav-link me-4 text-dark fw-semibold text-decoration-none">Alumni</a>
                 <a href="#kontak" class="nav-link me-4 text-dark fw-semibold text-decoration-none">Kontak</a>
-                <a href="#" class="btn btn-primary rounded-pill px-3 py-1 d-flex align-items-center me-4">
-                    <i class="bi bi-person-circle me-2"></i>
-                    <span class="fw-semibold">Login</span>
+                <a href="{{ route('login') }}"
+                    class="btn btn-primary rounded-pill px-3 py-1 d-flex align-items-center me-4">
+                    @auth
+                        <i class="bi bi-house-fill me-2"></i>
+                        <span class="fw-semibold">Dashboard</span>
+                    @else
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span class="fw-semibold">Login</span>
+                    @endauth
                 </a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
