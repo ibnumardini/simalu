@@ -11,6 +11,7 @@ return [
         'companies' => 'Companies',
         'settings' => 'Settings',
         'profile' => 'Profile',
+        'landingpage' => 'Landingpage',
         'roles' => 'Roles',
         'logout' => 'Logout',
         'lang' => [

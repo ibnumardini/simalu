@@ -11,6 +11,7 @@ return [
         'companies' => 'Perusahaan',
         'settings' => 'Pengaturan',
         'profile' => 'Profil',
+        'landingpage' => 'Halaman utama',
         'roles' => 'Peran',
         'logout' => 'Keluar',
         'lang' => [

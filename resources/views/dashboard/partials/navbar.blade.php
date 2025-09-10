@@ -39,6 +39,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="{{ route('profile.index') }}" class="dropdown-item">@lang('messages.navbar.profile')</a>
+                    <a href="{{ route('landingpage') }}" class="dropdown-item">@lang('messages.navbar.landingpage')</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="dropdown-item">@lang('messages.navbar.logout')</button>
