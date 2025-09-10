@@ -68,7 +68,7 @@
             <div class="row gx-5 align-items-center" style="min-height: 85vh;">
                 <div class="col-lg-6">
                     <!-- Mashead text and app badges-->
-                    <div class="mb-5 mb-lg-0 text-center text-lg-start">
+                    <div class="mb-lg-0 text-center text-lg-start">
                         <h1 class="display-3 display-lg-1 lh-1 mb-4">Terhubung dengan <span
                                 class="text-gradient">Alumni</span> Terbaik</h1>
                         <p class="lead fw-normal text-muted mb-4 mb-lg-5">Platform yang menghubungkan masa lalu, masa
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 d-none d-lg-block">
                     <!-- Masthead device mockup feature-->
                     <div class="masthead-device-mockup">
                         <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
