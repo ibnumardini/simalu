@@ -17,6 +17,8 @@
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
         rel="stylesheet" />
+    <!-- Flag icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     @vite('resources/css/landingpage.css')
 </head>
@@ -33,10 +35,24 @@
                 <a href="#page-top" class="nav-link me-4 text-dark fw-semibold text-decoration-none">Beranda</a>
                 <a href="#alumni" class="nav-link me-4 text-dark fw-semibold text-decoration-none">Alumni</a>
                 <a href="#kontak" class="nav-link me-4 text-dark fw-semibold text-decoration-none">Kontak</a>
-                <button class="btn btn-primary rounded-pill px-3 py-1 d-flex align-items-center">
+                <a href="#" class="btn btn-primary rounded-pill px-3 py-1 d-flex align-items-center me-4">
                     <i class="bi bi-person-circle me-2"></i>
                     <span class="fw-semibold">Login</span>
-                </button>
+                </a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <span class="fi fi-{{ app()->getLocale() == $locale_id_ID ? 'id' : 'us' }} me-2"></span>
+                        ({{ app()->getLocale() }})
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="{{ route('locale.switch', ['locale' => $locale_id_ID]) }}"
+                            class="dropdown-item {{ app()->getLocale() == $locale_id_ID ? 'disabled' : '' }}"><span
+                                class="fi fi-id me-2"></span> @lang('messages.navbar.lang.indonesia') ({{ $locale_id_ID }})</a>
+                        <a href="{{ route('locale.switch', ['locale' => $locale_en_US]) }}"
+                            class="dropdown-item {{ app()->getLocale() == $locale_en_US ? 'disabled' : '' }}"><span
+                                class="fi fi-us me-2"></span> @lang('messages.navbar.lang.english') ({{ $locale_en_US }})</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
