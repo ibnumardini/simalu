@@ -324,10 +324,10 @@
                     <br />
                     Mulai <span class="text-gradient">Bergabung.</span>
                 </h2>
-                <button class="btn btn-outline-light px-4 rounded-pill">
+                <a href="{{ route('register') }}" class="btn btn-outline-light px-4 rounded-pill">
                     <i class="bi-person-plus me-2"></i>
                     Bergabung Sekarang
-                </button>
+                </a>
             </div>
         </div>
     </section>
