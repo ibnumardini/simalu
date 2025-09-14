@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Providers;
 
 use App\Policies\RolePolicy;
@@ -6,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +30,9 @@ class AppServiceProvider extends ServiceProvider
         // Because the Role model is provided by the spatie/laravel-permission package,
         // we need to register the RolePolicy in the AppServiceProvider.
         Gate::policy(Role::class, RolePolicy::class);
+
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
