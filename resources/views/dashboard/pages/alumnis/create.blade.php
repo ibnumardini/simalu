@@ -151,7 +151,7 @@
 
         load: function(query, callback) {
           $.ajax({
-            url: '/master-data/get-users',
+            url: "{{ route('get.user') }}",
             data: {
               search: query
             },
@@ -189,7 +189,7 @@
 
         load: function(query, callback) {
           $.ajax({
-            url: '/master-data/get-schools',
+            url: "{{ route('get.school') }}",
             data: {
               search: query
             },
