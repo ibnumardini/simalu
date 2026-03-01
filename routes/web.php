@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingpageController;
 
 Route::get('/', [LandingpageController::class, 'index'])->name('landingpage');
+Route::get('/alumni', [LandingpageController::class, 'alumnis'])->name('landingpage.alumni');
 Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
 Route::prefix('dashboard')->group(function () {
