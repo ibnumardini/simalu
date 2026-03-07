@@ -20,7 +20,6 @@
     <!-- Flag icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    @vite('resources/css/landingpage.css')
 </head>
 
 <body id="page-top">
@@ -32,7 +31,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    @vite('resources/js/landingpage.js')
+    @vite(['resources/css/landingpage.css', 'resources/js/landingpage.js'])
 </body>
 
 </html>
