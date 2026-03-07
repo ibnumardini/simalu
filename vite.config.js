@@ -14,7 +14,10 @@ export default defineConfig({
             refresh: true,
         }),
         purge({
-            paths: ['resources/views/landingpage/*.blade.php'],
+            paths: [
+                "resources/views/**/*.blade.php",
+                "resources/js/**/*.js",
+            ],
         }),
     ],
 });
