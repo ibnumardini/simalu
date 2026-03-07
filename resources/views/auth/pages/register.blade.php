@@ -23,29 +23,29 @@
                 <div class="card-body">
                     <h2 class="h2 text-center mb-4">@lang('auth.register_title')</h2>
                     <div class="mb-3">
-                        <label class="form-label">@lang('auth.first_name')</label>
-                        <input type="text" name="first_name" class="form-control" placeholder="@lang('auth.first_name_placeholder')" value="{{ old('first_name') }}">
+                        <label class="form-label">@lang('auth.first_name') <span class="text-danger">*</span></label>
+                        <input type="text" name="first_name" class="form-control" placeholder="@lang('auth.first_name_placeholder')" value="{{ old('first_name') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">@lang('auth.last_name')</label>
-                        <input type="text" name="last_name" class="form-control" placeholder="@lang('auth.last_name_placeholder')" value="{{ old('last_name') }}">
+                        <label class="form-label">@lang('auth.last_name') <span class="text-danger">*</span></label>
+                        <input type="text" name="last_name" class="form-control" placeholder="@lang('auth.last_name_placeholder')" value="{{ old('last_name') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">@lang('auth.email_address')</label>
-                        <input type="email" name="email" class="form-control" placeholder="@lang('auth.email_placeholder_register')" value="{{ old('email') }}">
+                        <label class="form-label">@lang('auth.email_address') <span class="text-danger">*</span></label>
+                        <input type="email" name="email" class="form-control" placeholder="@lang('auth.email_placeholder_register')" value="{{ old('email') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">@lang('auth.password_label')</label>
+                        <label class="form-label">@lang('auth.password_label') <span class="text-danger">*</span></label>
                         <div class="input-group input-group-flat">
                             <input type="password" name="password" class="form-control" placeholder="@lang('auth.password_placeholder_register')"
-                                autocomplete="off">
+                                autocomplete="off" required>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">@lang('auth.password_confirmation')</label>
+                        <label class="form-label">@lang('auth.password_confirmation') <span class="text-danger">*</span></label>
                         <div class="input-group input-group-flat">
                             <input type="password" name="password_confirmation" class="form-control"
-                                placeholder="@lang('auth.password_confirmation_placeholder')" autocomplete="off">
+                                placeholder="@lang('auth.password_confirmation_placeholder')" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="form-footer">
