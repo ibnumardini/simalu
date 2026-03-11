@@ -53,7 +53,9 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="text-white-50 small">
-                    &copy; 2024 Simalu Alumni. Semua Hak Dilindungi.
+                    {{ __('messages.footer.copyright', ['year' => date('Y')]) }}
+                    {{ config('app.name') }} {{ __('messages.footer.app_developed') }}
+                    {{ __('messages.footer.all_rights_reserved') }}
                 </div>
             </div>
             <div class="col-md-6 text-md-end">
