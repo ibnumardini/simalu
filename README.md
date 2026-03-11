@@ -36,6 +36,16 @@ Want to see more? Check out our [complete application screenshots](SCREENSHOT.md
    ```
    
 6. Fill the .env settings to the current environment.
+
+   If you want to enable Google Login/Register, set these variables too:
+
+   ```sh
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
+   ```
+
+   Configure the same callback URL in your Google Cloud OAuth credentials.
 7. Run the database migrations.
 
    ```sh

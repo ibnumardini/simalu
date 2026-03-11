@@ -24,6 +24,24 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
+
+      .btn-google-auth {
+        background-color: #fff;
+        border-color: #dadce0;
+        color: #3c4043;
+      }
+
+      .btn-google-auth:hover,
+      .btn-google-auth:focus,
+      .btn-google-auth:active {
+        background-color: #f8f9fa;
+        border-color: #d2d6da;
+        color: #3c4043;
+      }
+
+      .btn-google-auth svg {
+        flex-shrink: 0;
+      }
     </style>
       <link
         rel="stylesheet"

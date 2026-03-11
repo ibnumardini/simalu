@@ -39,5 +39,10 @@ return [
     'email_placeholder_register' => 'Enter email',
     'password_placeholder_register' => 'Password',
     'password_confirmation_placeholder' => 'Password confirmation',
+    'or_continue_with' => 'Or continue with',
+    'continue_with_google' => 'Continue with Google',
+    'google_login_failed' => 'Unable to login with Google. Please try again.',
+    'google_email_missing' => 'Google account does not provide an email address.',
+    'google_email_not_verified' => 'Your Google email is not verified.',
 
 ];

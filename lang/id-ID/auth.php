@@ -39,5 +39,10 @@ return [
     'email_placeholder_register' => 'Masukkan email',
     'password_placeholder_register' => 'Kata sandi',
     'password_confirmation_placeholder' => 'Konfirmasi kata sandi',
+    'or_continue_with' => 'Atau lanjutkan dengan',
+    'continue_with_google' => 'Lanjutkan dengan Google',
+    'google_login_failed' => 'Tidak dapat masuk dengan Google. Silakan coba lagi.',
+    'google_email_missing' => 'Akun Google tidak menyediakan alamat email.',
+    'google_email_not_verified' => 'Email Google Anda belum terverifikasi.',
 
 ];
